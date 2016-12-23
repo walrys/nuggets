@@ -9,13 +9,13 @@ import com.badlogic.gdx.graphics.Texture;
  * Created by Walrus on 12/23/2016.
  */
 
-public class PlayScreen implements Screen {
-    private Nuggets game;
-    Texture playsketch;
+public class MainScreen implements Screen {
+    Nuggets game;
+    Texture mainsketch;
 
-    public PlayScreen(Nuggets game){
+    public MainScreen(Nuggets game){
         this.game = game;
-        playsketch = new Texture("sketch_play.jpg");
+        mainsketch = new Texture("sketch_main.JPG");
     }
     @Override
     public void show() {
@@ -27,7 +27,7 @@ public class PlayScreen implements Screen {
         Gdx.gl.glClearColor(1,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
-        game.batch.draw(playsketch,0,0);
+        game.batch.draw(mainsketch,0,0);
         game.batch.end();
     }
 

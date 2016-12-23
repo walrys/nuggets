@@ -18,7 +18,7 @@ public class Nuggets extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		setScreen(new PlayScreen(this));
+		setScreen(new MainScreen(this));
 	}
 
 	@Override
