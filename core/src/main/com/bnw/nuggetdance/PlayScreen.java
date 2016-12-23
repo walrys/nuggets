@@ -2,7 +2,6 @@ package com.bnw.nuggetdance;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 
 /**
@@ -12,10 +11,13 @@ import com.badlogic.gdx.graphics.Texture;
 public class PlayScreen implements Screen {
     private Nuggets game;
     Texture playsketch;
+    Texture playsketch2;
+    float x,y;
 
     public PlayScreen(Nuggets game){
         this.game = game;
         playsketch = new Texture("sketch_play.jpg");
+        playsketch2 = new Texture("sketch_play2.jpg");
     }
     @Override
     public void show() {
@@ -24,11 +26,28 @@ public class PlayScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1,0,0,1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        update(delta);
+
         game.batch.begin();
-        game.batch.draw(playsketch,0,0);
+        game.batch.draw(playsketch,x,y);
+        game.batch.draw(playsketch2,x+game.WIDTH,y);
         game.batch.end();
+    }
+
+
+    public void update(float dt){
+        //handle user input first
+        handleInput(dt);
+    }
+
+
+    protected void handleInput(float dt) {
+        if(Gdx.input.isTouched()){
+            if(x>-game.WIDTH)
+            x-=10;
+        }
+        else if (x<0)
+            x+=10;
     }
 
     @Override
