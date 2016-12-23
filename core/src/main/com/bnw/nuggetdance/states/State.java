@@ -18,9 +18,19 @@ public abstract class State {
         mouse = new Vector3();
 
     }
-    //State class methods:
+
+    /*
+     *  State class methods
+     */
+
     protected abstract void handleInput();
-    public abstract void update(float dt); //delta time: the difference between frames rendered
-    public abstract void render(SpriteBatch sb); //sprite batch: container for everything that needs to be rendered
-    public abstract void dispose(); //"to be called when we transition between states"
+
+    // delta time: the difference between frames rendered
+    public abstract void update(float dt);
+
+    // sprite batch: container for everything that needs to be rendered
+    public abstract void render(SpriteBatch sb);
+
+    // "to be called when we transition between states"
+    public abstract void dispose();
 }

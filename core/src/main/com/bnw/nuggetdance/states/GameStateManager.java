@@ -7,29 +7,32 @@ public class GameStateManager {
 
     private Stack<State> states;
 
-    public GameStateManager(){
+    public GameStateManager()   {
         states = new Stack<State>();
     }
 
     //Methods to manage stack
-    public void push(State state){
+    public void push(State state)   {
         states.push(state);
     }
 
-    public void pop(){
-        states.pop().dispose(); //return pop and dispose
+    //return pop and dispose
+    public void pop()   {
+        states.pop().dispose();
     }
 
-    public void set(State state){
+    public void set(State state)    {
         states.pop().dispose();
         states.push(state);
     }
 
-    public void update(float dt){ //to keep looking at the top of GSM stack
+    //to keep looking at the top of GSM stack
+    public void update(float dt)    {
         states.peek().update(dt);
     }
 
-    public void render(SpriteBatch sb){ //keeps rendering sb of current state
+    //keeps rendering sb of current state
+    public void render(SpriteBatch sb)  {
         states.peek().render(sb);
     }
 }
