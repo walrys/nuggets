@@ -1,4 +1,4 @@
-package com.bnw.nuggetdance.states;
+package com.bnw.nuggetdance.States;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 

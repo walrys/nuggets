@@ -1,4 +1,4 @@
-package com.bnw.nuggetdance.states;
+package com.bnw.nuggetdance.States;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -18,19 +18,9 @@ public abstract class State {
         mouse = new Vector3();
 
     }
-
-    /*
-     *  State class methods
-     */
-
+    //com.bnw.nuggetdance.States.State class methods:
     protected abstract void handleInput();
-
-    // delta time: the difference between frames rendered
-    public abstract void update(float dt);
-
-    // sprite batch: container for everything that needs to be rendered
-    public abstract void render(SpriteBatch sb);
-
-    // "to be called when we transition between states"
-    public abstract void dispose();
+    public abstract void update(float dt); //delta time: the difference between frames rendered
+    public abstract void render(SpriteBatch sb); //sprite batch: container for everything that needs to be rendered
+    public abstract void dispose(); //"to be called when we transition between states"
 }
