@@ -1,10 +1,11 @@
-package com.bnw.nuggetdance;
+package com.bnw.nuggetdance.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.bnw.nuggetdance.Backgrounds.MainBackground;
 import com.bnw.nuggetdance.Debug.InputHandlerDebug;
+import com.bnw.nuggetdance.Nuggets;
 
 /**
  * Created by Walrus on 12/23/2016.
@@ -65,7 +66,7 @@ public class MainScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        mainBackground.dispose();
     }
 
     /*

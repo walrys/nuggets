@@ -14,8 +14,8 @@ public class PlayBackground extends Background {
     private static float x = 0;
     private static float y = 0;
 
-    Texture playsketch_1;
-    Texture playsketch_2;
+    private Texture playsketch_1;
+    private Texture playsketch_2;
 
     public PlayBackground() {
         playsketch_1 = new Texture(BACKGROUND_NAME_1);

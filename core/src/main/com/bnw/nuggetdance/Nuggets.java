@@ -9,7 +9,7 @@ public class Nuggets extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		setScreen(new MainScreen(this));
+		setScreen(new com.bnw.nuggetdance.Screens.MainScreen(this));
 	}
 
 	@Override

@@ -3,8 +3,8 @@ package com.bnw.nuggetdance.Debug;
 import com.badlogic.gdx.Gdx;
 import com.bnw.nuggetdance.Backgrounds.PlayBackground;
 import com.bnw.nuggetdance.Constants.ApplicationConstants;
-import com.bnw.nuggetdance.MainScreen;
-import com.bnw.nuggetdance.PlayScreen;
+import com.bnw.nuggetdance.Screens.MainScreen;
+import com.bnw.nuggetdance.Screens.PlayScreen;
 
 /**
  * Created by Brandon on 23/12/16.

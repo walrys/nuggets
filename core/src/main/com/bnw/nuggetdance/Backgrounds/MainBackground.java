@@ -11,7 +11,7 @@ public class MainBackground extends Background  {
     private static float x = 0;
     private static float y = 0;
 
-    Texture mainsketch;
+    private Texture mainsketch;
 
     public MainBackground() {
         mainsketch = new Texture(BACKGROUND_NAME);
