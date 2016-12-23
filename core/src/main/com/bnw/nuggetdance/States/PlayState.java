@@ -1,4 +1,4 @@
-package com.bnw.nuggetdance.states;
+package com.bnw.nuggetdance.States;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * Created by Walrus on 12/22/2016.
  */
 
-public class MenuState extends State {
+public class PlayState extends State {
     @Override
     protected void handleInput() {
 
