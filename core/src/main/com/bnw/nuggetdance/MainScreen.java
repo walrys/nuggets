@@ -3,7 +3,7 @@ package com.bnw.nuggetdance;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
+import com.bnw.nuggetdance.Backgrounds.BackgroundMain;
 
 /**
  * Created by Walrus on 12/23/2016.
@@ -11,11 +11,11 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class MainScreen implements Screen {
     Nuggets game;
-    Texture mainsketch;
+    BackgroundMain mainBackground;
 
     public MainScreen(Nuggets game){
         this.game = game;
-        mainsketch = new Texture("sketch_main.JPG");
+        mainBackground = new BackgroundMain();
     }
     @Override
     public void show() {
@@ -26,9 +26,9 @@ public class MainScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(1,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        game.batch.begin();
-        game.batch.draw(mainsketch,0,0);
-        game.batch.end();
+
+        // draw background image
+        mainBackground.draw(game.batch);
     }
 
     @Override
