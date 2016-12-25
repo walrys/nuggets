@@ -31,7 +31,7 @@ public class InputHandlerDebug {
 
     public float handleTouchInput(float dt, MainScreen screen)    {
         if(Gdx.input.isTouched()){
-            screen.getGame().setScreen(new PlayScreen(screen.getGame()));
+            screen.getGame().setScreen(new PlayScreen(screen.getGame(), screen.getAssetManager()));
             screen.dispose();
         }
 

@@ -1,25 +1,24 @@
 package com.bnw.nuggetdance.Backgrounds;
 
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bnw.nuggetdance.Constants.ApplicationConstants;
+import com.bnw.nuggetdance.Constants.AssetConstants;
 
 /**
  * Created by Brandon on 23/12/16.
  */
 public class PlayBackground extends Background {
-    private static final String BACKGROUND_NAME_1 = new String("sketch_play.jpg");
-    private static final String BACKGROUND_NAME_2 = new String("sketch_play2.jpg");
-
     private static float x = 0;
     private static float y = 0;
 
     private Texture playsketch_1;
     private Texture playsketch_2;
 
-    public PlayBackground() {
-        playsketch_1 = new Texture(BACKGROUND_NAME_1);
-        playsketch_2 = new Texture(BACKGROUND_NAME_2);
+    public PlayBackground(AssetManager assetManager) {
+        playsketch_1 = assetManager.get(AssetConstants.BACKGROUND_PLAY_1, Texture.class);
+        playsketch_2 = assetManager.get(AssetConstants.BACKGROUND_PLAY_2, Texture.class);
     }
 
     @Override

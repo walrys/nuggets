@@ -1,20 +1,21 @@
 package com.bnw.nuggetdance.Backgrounds;
 
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.bnw.nuggetdance.Constants.AssetConstants;
 
 /**
  * Created by Brandon on 23/12/16.
  */
 public class MainBackground extends Background  {
-    private static final String BACKGROUND_NAME = new String("sketch_main.JPG");
     private static float x = 0;
     private static float y = 0;
 
     private Texture mainsketch;
 
-    public MainBackground() {
-        mainsketch = new Texture(BACKGROUND_NAME);
+    public MainBackground(AssetManager assetManager) {
+        mainsketch = assetManager.get(AssetConstants.BACKGROUND_MAIN_1, Texture.class);
     }
 
     @Override
@@ -27,7 +28,6 @@ public class MainBackground extends Background  {
     @Override
     public boolean dispose()    {
         mainsketch.dispose();
-
         return true;
     }
 

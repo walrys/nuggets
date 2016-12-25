@@ -2,6 +2,7 @@ package com.bnw.nuggetdance.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.bnw.nuggetdance.Backgrounds.PlayBackground;
 import com.bnw.nuggetdance.Debug.InputHandlerDebug;
@@ -13,13 +14,17 @@ import com.bnw.nuggetdance.Nuggets;
 
 public class PlayScreen implements Screen {
     private Nuggets game;
+    private AssetManager assetManager;
+
     private PlayBackground playBackGround;
 
     private InputHandlerDebug debugInputHandler;
 
-    public PlayScreen(Nuggets game){
+    public PlayScreen(Nuggets game, AssetManager assetManager)  {
         this.game = game;
-        this.playBackGround = new PlayBackground();
+        this.assetManager = assetManager;
+
+        this.playBackGround = new PlayBackground(this.assetManager);
 
         this.debugInputHandler = new InputHandlerDebug();
     }
@@ -84,4 +89,7 @@ public class PlayScreen implements Screen {
         return playBackGround;
     }
 
+    public AssetManager getAssetManager() {
+        return assetManager;
+    }
 }
