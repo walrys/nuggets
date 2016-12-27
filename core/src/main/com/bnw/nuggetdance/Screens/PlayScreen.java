@@ -2,10 +2,8 @@ package com.bnw.nuggetdance.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.bnw.nuggetdance.Backgrounds.PlayBackground;
-import com.bnw.nuggetdance.Debug.InputHandlerDebug;
 import com.bnw.nuggetdance.Nuggets;
 
 /**
@@ -14,20 +12,15 @@ import com.bnw.nuggetdance.Nuggets;
 
 public class PlayScreen implements Screen {
     private Nuggets game;
-    private AssetManager assetManager;
 
     private PlayBackground playBackGround;
 
-    private InputHandlerDebug debugInputHandler;
 
-    public PlayScreen(Nuggets game, AssetManager assetManager)  {
+    public PlayScreen(Nuggets game)  {
         this.game = game;
-        this.assetManager = assetManager;
-
-        this.playBackGround = new PlayBackground(this.assetManager);
-
-        this.debugInputHandler = new InputHandlerDebug();
+        this.playBackGround = new PlayBackground(game.assetManager, game.gameCam);
     }
+
     @Override
     public void show() {
 
@@ -37,11 +30,20 @@ public class PlayScreen implements Screen {
     public void render(float delta) {
         update(delta);
 
-        Gdx.gl.glClearColor(1,0,0,1);
+        Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        // set projection matrix
+        game.batch.setProjectionMatrix(game.gameCam.combined);
 
         // draw play background
         playBackGround.draw(game.batch);
+
+        // draw debug rectangles
+        game.debugInterface.renderRectangleButtons(game.gameCam);
+
+        // update game camera
+        game.gameCam.update();
     }
 
 
@@ -49,12 +51,12 @@ public class PlayScreen implements Screen {
         //handle user input first
 
         // handles all debug controls
-        debugInputHandler.handleTouchInput(dt, this);
+        game.debugInputHandler.handleTouchInput(dt, this);
     }
 
     @Override
     public void resize(int width, int height) {
-
+        game.gamePort.update(width, height);
     }
 
     @Override
@@ -87,9 +89,5 @@ public class PlayScreen implements Screen {
 
     public PlayBackground getPlayBackground()  {
         return playBackGround;
-    }
-
-    public AssetManager getAssetManager() {
-        return assetManager;
     }
 }

@@ -1,6 +1,7 @@
 package com.bnw.nuggetdance.Debug;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.bnw.nuggetdance.Backgrounds.PlayBackground;
 import com.bnw.nuggetdance.Constants.ApplicationConstants;
 import com.bnw.nuggetdance.Screens.MainScreen;
@@ -18,12 +19,16 @@ public class InputHandlerDebug {
         PlayBackground background = screen.getPlayBackground();
         float xShift = 0;
 
-        if(Gdx.input.isTouched())   {
-            if(background.getXCoordinate() > -ApplicationConstants.WIDTH) {
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT))   {
+            if(background.getXCoordinate() < ApplicationConstants.WIDTH) {
+                xShift = background.moveXCoordinate(10);
+            }
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT))    {
+            if (background.getXCoordinate() > 0) {
                 xShift = background.moveXCoordinate(-10);
             }
-        } else if (background.getXCoordinate() < 0) {
-            xShift = background.moveXCoordinate(10);
         }
 
         return xShift;
@@ -31,7 +36,7 @@ public class InputHandlerDebug {
 
     public float handleTouchInput(float dt, MainScreen screen)    {
         if(Gdx.input.isTouched()){
-            screen.getGame().setScreen(new PlayScreen(screen.getGame(), screen.getAssetManager()));
+            screen.getGame().setScreen(new PlayScreen(screen.getGame()));
             screen.dispose();
         }
 

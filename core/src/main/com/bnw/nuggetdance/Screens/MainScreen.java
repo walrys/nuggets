@@ -2,10 +2,8 @@ package com.bnw.nuggetdance.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.bnw.nuggetdance.Backgrounds.MainBackground;
-import com.bnw.nuggetdance.Debug.InputHandlerDebug;
 import com.bnw.nuggetdance.Nuggets;
 
 /**
@@ -13,20 +11,15 @@ import com.bnw.nuggetdance.Nuggets;
  */
 
 public class MainScreen implements Screen {
-    Nuggets game;
-    AssetManager assetManager;
+    private Nuggets game;
+    private MainBackground mainBackground;
 
-    MainBackground mainBackground;
-    InputHandlerDebug debugInputHandler;
-
-    public MainScreen(Nuggets game, AssetManager assetManager){
+    public MainScreen(Nuggets game) {
         this.game = game;
-        this.assetManager = assetManager;
 
-        mainBackground = new MainBackground(this.assetManager);
-
-        debugInputHandler = new InputHandlerDebug();
+        mainBackground = new MainBackground(game.assetManager, game.gameCam);
     }
+
     @Override
     public void show() {
 
@@ -40,17 +33,23 @@ public class MainScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        // set projection matrix
+        game.batch.setProjectionMatrix(game.gameCam.combined);
+
         // draw background image
         mainBackground.draw(game.batch);
+
+        // update game camera
+        game.gameCam.update();
     }
 
     public void update(float dt){
         //handle user input first
-        debugInputHandler.handleTouchInput(dt, this);
+        game.debugInputHandler.handleTouchInput(dt, this);
     }
     @Override
     public void resize(int width, int height) {
-
+        game.gamePort.update(width, height);
     }
 
     @Override
@@ -83,9 +82,5 @@ public class MainScreen implements Screen {
 
     public MainBackground getMainBackground()    {
         return mainBackground;
-    }
-
-    public AssetManager getAssetManager() {
-        return assetManager;
     }
 }
