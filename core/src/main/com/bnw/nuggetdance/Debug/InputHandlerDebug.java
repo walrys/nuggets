@@ -11,11 +11,13 @@ import com.bnw.nuggetdance.Screens.PlayScreen;
  * Created by Brandon on 23/12/16.
  */
 public class InputHandlerDebug {
+    private InterfaceDebug debugInterface;
 
-    public InputHandlerDebug() {
+    public InputHandlerDebug(InterfaceDebug debugInterface) {
+        this.debugInterface = debugInterface;
     }
 
-    public float handleTouchInput(float dt, PlayScreen screen)   {
+    public void handleTouchInput(float dt, PlayScreen screen)   {
         PlayBackground background = screen.getPlayBackground();
         float xShift = 0;
 
@@ -30,16 +32,14 @@ public class InputHandlerDebug {
                 xShift = background.moveXCoordinate(-10);
             }
         }
-
-        return xShift;
     }
 
-    public float handleTouchInput(float dt, MainScreen screen)    {
+    public void handleTouchInput(float dt, MainScreen screen)    {
         if(Gdx.input.isTouched()){
             screen.getGame().setScreen(new PlayScreen(screen.getGame()));
+            Gdx.input.setInputProcessor(screen.getGame().debugInterface.getStage());
             screen.dispose();
         }
 
-        return -1;
     }
 }

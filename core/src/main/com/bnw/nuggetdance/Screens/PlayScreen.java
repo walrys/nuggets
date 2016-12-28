@@ -39,8 +39,8 @@ public class PlayScreen implements Screen {
         // draw play background
         playBackGround.draw(game.batch);
 
-        // draw debug rectangles
-        game.debugInterface.renderRectangleButtons(game.gameCam);
+        // draw debug
+        game.debugInterface.draw();
 
         // update game camera
         game.gameCam.update();

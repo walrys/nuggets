@@ -34,8 +34,8 @@ public class Nuggets extends Game {
 		assetManager.load(AssetConstants.BACKGROUND_PLAY_2, Texture.class);
 		assetManager.finishLoading();
 
-		debugInputHandler = new InputHandlerDebug();
 		debugInterface = new InterfaceDebug(batch);
+		debugInputHandler = new InputHandlerDebug(debugInterface);
 
 		setScreen(new MainScreen(this));
 	}
