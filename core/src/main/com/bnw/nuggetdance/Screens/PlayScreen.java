@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.bnw.nuggetdance.Backgrounds.PlayBackground;
+import com.bnw.nuggetdance.Debug.PlayerDebug;
 import com.bnw.nuggetdance.Nuggets;
 
 /**
@@ -14,11 +15,14 @@ public class PlayScreen implements Screen {
     private Nuggets game;
 
     private PlayBackground playBackGround;
+    private PlayerDebug player;
 
 
     public PlayScreen(Nuggets game)  {
         this.game = game;
         this.playBackGround = new PlayBackground(game.assetManager, game.gameCam);
+
+        player = new PlayerDebug(game, game.assetManager);
     }
 
     @Override
@@ -41,6 +45,7 @@ public class PlayScreen implements Screen {
 
         // draw debug
         game.debugInterface.draw();
+        player.draw(game.batch);
 
         // update game camera
         game.gameCam.update();
@@ -52,6 +57,7 @@ public class PlayScreen implements Screen {
 
         // handles all debug controls
         game.debugInputHandler.handleTouchInput(dt, this);
+        player.update(dt);
     }
 
     @Override
