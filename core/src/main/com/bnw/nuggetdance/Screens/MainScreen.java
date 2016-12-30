@@ -36,7 +36,7 @@ public class MainScreen implements Screen {
         // set projection matrix
         game.batch.setProjectionMatrix(game.gameCam.combined);
 
-        // draw background image
+        // render background image
         mainBackground.draw(game.batch);
 
         // update game camera

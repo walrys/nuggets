@@ -14,7 +14,7 @@ public final class AssetConstants {
 
     // Sound asset filepath
 
-
-    // Music asset filepath
+    // DanceMusic asset filepath
+    public static final String MUSIC_SOUL_BOSSA = new String("music/soul_bossa_nova.mp3");
 
 }

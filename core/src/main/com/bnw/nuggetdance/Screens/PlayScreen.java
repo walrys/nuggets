@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.bnw.nuggetdance.Backgrounds.PlayBackground;
+import com.bnw.nuggetdance.Music.DanceMusic;
 import com.bnw.nuggetdance.Nuggets;
+import com.bnw.nuggetdance.Sprites.Demonstrator;
 
 /**
  * Created by Walrus on 12/23/2016.
@@ -15,10 +17,16 @@ public class PlayScreen implements Screen {
 
     private PlayBackground playBackGround;
 
+    private Demonstrator demo;
+    private DanceMusic danceMusic;
+
 
     public PlayScreen(Nuggets game)  {
         this.game = game;
         this.playBackGround = new PlayBackground(game.assetManager, game.gameCam);
+
+        this.demo = new Demonstrator(this.game.debugInterface);
+        this.danceMusic = new DanceMusic(game);
     }
 
     @Override
@@ -36,11 +44,11 @@ public class PlayScreen implements Screen {
         // set projection matrix
         game.batch.setProjectionMatrix(game.gameCam.combined);
 
-        // draw play background
+        // render play background
         playBackGround.draw(game.batch);
 
-        // draw debug
-        game.debugInterface.draw();
+        // render debug
+        game.debugInterface.render();
 
         // update game camera
         game.gameCam.update();
@@ -48,10 +56,19 @@ public class PlayScreen implements Screen {
 
 
     public void update(float dt){
-        //handle user input first
+        // play music
+        if (!danceMusic.isCurrentMusicPlaying()) {
+            danceMusic.randomizeMusic();
+            danceMusic.playCurrentMusic(false);
+        }
+
+        // handle user input first
 
         // handles all debug controls
         game.debugInputHandler.handleTouchInput(dt, this);
+
+        // update move generator
+        demo.update(dt, danceMusic);
     }
 
     @Override

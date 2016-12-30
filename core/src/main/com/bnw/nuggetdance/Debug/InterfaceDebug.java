@@ -2,6 +2,7 @@ package com.bnw.nuggetdance.Debug;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -13,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+
 import com.bnw.nuggetdance.Constants.ApplicationConstants;
 
 import java.util.ArrayList;
@@ -25,6 +27,8 @@ public class InterfaceDebug {
     protected static ArrayList<String> labelStrings;
     protected static Label currentRightButtonPosition;
     protected static Label currentLeftButtonPosition;
+    private Label demoLeftPosition;
+    private Label demoRightPosition;
     private Stage stage;
     private Viewport viewPort;
     private Table controlsTableTop;
@@ -39,6 +43,8 @@ public class InterfaceDebug {
     private TextButton.TextButtonStyle buttonStyle;
     private BitmapFont font;
     private Label.LabelStyle debugLabelStyle;
+
+    private FPSLogger fps = new FPSLogger();
 
 
     public InterfaceDebug(SpriteBatch sb) {
@@ -70,6 +76,9 @@ public class InterfaceDebug {
         this.debugLabelStyle = new Label.LabelStyle(font, Color.BLACK);
         this.currentRightButtonPosition = new Label(labelStrings.get(0), debugLabelStyle);
         this.currentLeftButtonPosition = new Label(labelStrings.get(0), debugLabelStyle);
+
+        this.demoLeftPosition = new Label("NONE", debugLabelStyle);
+        this.demoRightPosition = new Label("NONE", debugLabelStyle);
 
         // adding a button style
         this.skin.addRegions(buttonTexture);
@@ -152,11 +161,16 @@ public class InterfaceDebug {
         this.controlsTableBottom.add(rightButtons.get(6).pad(5, 5, 5, 5)).pad(10, 1, 60, 1).width(77.5f);
         this.controlsTableBottom.add(rightButtons.get(7).pad(5, 5, 5, 5)).pad(10, 1, 60, 1).width(77.5f);
 
-        //this.debugTableInfo.debugAll();
+        this.debugTableInfo.debugAll();
         this.debugTableInfo.top();
         this.debugTableInfo.setFillParent(true);
         this.debugTableInfo.add(currentLeftButtonPosition).pad(300, 0, 0, 100);
         this.debugTableInfo.add(currentRightButtonPosition).pad(300, 100, 0, 0);
+
+        this.debugTableInfo.row();
+
+        this.debugTableInfo.add(demoLeftPosition).pad(100, 0, 0, 100);
+        this.debugTableInfo.add(demoRightPosition).pad(100, 100, 0, 0);
 
         stage.addActor(this.controlsTableTop);
         stage.addActor(this.controlsTableCentre);
@@ -164,8 +178,11 @@ public class InterfaceDebug {
         stage.addActor(this.debugTableInfo);
     }
 
-    public boolean draw()  {
-        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+    public boolean render()  {
+        // print fps every second
+        fps.log();
+
+        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 60f));
         stage.draw();
         return true;
     }
@@ -178,5 +195,13 @@ public class InterfaceDebug {
 
     public Stage getStage()  {
         return stage;
+    }
+
+    public Label getDemoLeftLabel() {
+        return demoLeftPosition;
+    }
+
+    public Label getDemoRightLabel()  {
+        return demoRightPosition;
     }
 }

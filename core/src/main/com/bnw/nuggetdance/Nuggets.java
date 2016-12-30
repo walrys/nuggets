@@ -2,6 +2,7 @@ package com.bnw.nuggetdance;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -32,6 +33,7 @@ public class Nuggets extends Game {
 		assetManager.load(AssetConstants.BACKGROUND_MAIN_1, Texture.class);
 		assetManager.load(AssetConstants.BACKGROUND_PLAY_1, Texture.class);
 		assetManager.load(AssetConstants.BACKGROUND_PLAY_2, Texture.class);
+		assetManager.load(AssetConstants.MUSIC_SOUL_BOSSA, Music.class);
 		assetManager.finishLoading();
 
 		debugInterface = new InterfaceDebug(batch);
