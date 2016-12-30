@@ -71,11 +71,11 @@ public class PlayScreen implements Screen {
         // handles all debug controls
         game.debugInputHandler.handleTouchInput(dt, this);
 
-        // update move generator
-        demo.update(dt, danceMusic);
-
         // update player
-        player.update(dt);
+        player.update(dt, danceMusic);
+
+        // update demo
+        demo.update(dt, danceMusic);
     }
 
     @Override

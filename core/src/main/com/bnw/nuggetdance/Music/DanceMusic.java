@@ -32,7 +32,7 @@ public class DanceMusic {
 
         // add dance music into game
         this.danceMusic.add(game.assetManager.get(AssetConstants.MUSIC_SOUL_BOSSA, Music.class));
-        this.bpmList.add(154);
+        this.bpmList.add(147);
 
         this.currentMusic = danceMusic.get(0);
     }
@@ -56,6 +56,10 @@ public class DanceMusic {
 
     public boolean isCurrentMusicPlaying()   {
         return currentMusic.isPlaying();
+    }
+
+    public long getBeat()    {
+        return metronome.getLastBeatCount();
     }
 
     public boolean isCorrectBeat() {

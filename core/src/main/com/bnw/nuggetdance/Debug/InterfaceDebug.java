@@ -183,20 +183,11 @@ public class InterfaceDebug {
 
     public boolean render()  {
         // print fps every second
-        fps.log();
+        //fps.log();
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 60f));
         stage.draw();
         return true;
-    }
-
-    public static void setCurrentArmPosition(int position, int arm){
-        if(arm == 0){
-            currentLeftArmPosition = position;
-        }
-        else {
-            currentRightArmPosition = position;
-        }
     }
 
     public void dispose()   {
@@ -215,5 +206,14 @@ public class InterfaceDebug {
 
     public Label getDemoRightLabel()  {
         return demoRightPosition;
+    }
+
+    public static void setCurrentArmPosition(int position, int arm){
+        if(arm == 0){
+            currentLeftArmPosition = position;
+        }
+        else {
+            currentRightArmPosition = position;
+        }
     }
 }

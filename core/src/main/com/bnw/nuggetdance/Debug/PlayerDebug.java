@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.bnw.nuggetdance.Constants.ApplicationConstants;
 import com.bnw.nuggetdance.Constants.AssetConstants;
+import com.bnw.nuggetdance.Music.DanceMusic;
 import com.bnw.nuggetdance.Nuggets;
 
 
@@ -16,7 +17,7 @@ import com.bnw.nuggetdance.Nuggets;
 public class PlayerDebug extends Sprite {
     private boolean bob = false;
     private AssetManager assetManager;
-    private int timer = 0;
+    private long timer = 0;
     private Nuggets game;
     private Texture leftArm, rightArm;
     
@@ -94,11 +95,16 @@ public class PlayerDebug extends Sprite {
         }
     }
 
-    public void update(float dt){
-        timer++;
+    public void update(float dt, DanceMusic danceMusic){
+        /*timer++;
         if(timer%ApplicationConstants.BOUNCE_SPEED == 0) {
             bob = !bob;
             timer = 0;
+        }*/
+
+        if (danceMusic.getBeat() != timer) {
+            timer = danceMusic.getBeat();
+            bob = !bob;
         }
 
         float x_offset = ApplicationConstants.WIDTH/2 - getWidth()/2;

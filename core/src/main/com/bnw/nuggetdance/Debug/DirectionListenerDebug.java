@@ -47,8 +47,10 @@ public class DirectionListenerDebug extends InputListener{
         System.out.println(textButton.getLabel().getText() + " Exited");
         if (direction == 0) {
             InterfaceDebug.currentLeftButtonPosition.setText(InterfaceDebug.labelStrings.get(0));
+            InterfaceDebug.setCurrentArmPosition(0, 0);
         } else if (direction == 1)  {
             InterfaceDebug.currentRightButtonPosition.setText(InterfaceDebug.labelStrings.get(0));
+            InterfaceDebug.setCurrentArmPosition(0, 1);
         }
         super.exit(event, x, y, pointer, toActor);
     }
