@@ -7,7 +7,7 @@ import com.bnw.nuggetdance.Backgrounds.PlayBackground;
 import com.bnw.nuggetdance.Music.DanceMusic;
 import com.bnw.nuggetdance.Debug.PlayerDebug;
 import com.bnw.nuggetdance.Nuggets;
-import com.bnw.nuggetdance.Sprites.Demonstrator;
+import com.bnw.nuggetdance.Sprites.DemonstratorNugget;
 
 /**
  * Created by Walrus on 12/23/2016.
@@ -19,7 +19,7 @@ public class PlayScreen implements Screen {
     private PlayBackground playBackGround;
     private PlayerDebug player;
 
-    private Demonstrator demo;
+    private DemonstratorNugget demo;
     private DanceMusic danceMusic;
 
 
@@ -27,7 +27,7 @@ public class PlayScreen implements Screen {
         this.game = game;
         this.playBackGround = new PlayBackground(game.assetManager, game.gameCam);
 
-        this.demo = new Demonstrator(this.game.debugInterface);
+        this.demo = new DemonstratorNugget(this.game);
         this.danceMusic = new DanceMusic(game);
         player = new PlayerDebug(game, game.assetManager);
     }
@@ -52,7 +52,12 @@ public class PlayScreen implements Screen {
 
         // render debug
         game.debugInterface.render();
-        player.draw(game.batch);
+
+        // render player
+        player.draw(game.batch, game.assetManager);
+
+        // render demo
+        demo.draw(game.batch, game.assetManager);
 
         // update game camera
         game.gameCam.update();
@@ -72,10 +77,10 @@ public class PlayScreen implements Screen {
         game.debugInputHandler.handleTouchInput(dt, this);
 
         // update player
-        player.update(dt, danceMusic);
+        player.update(dt, danceMusic, game.gameCam);
 
         // update demo
-        demo.update(dt, danceMusic);
+        demo.update(dt, danceMusic, game.gameCam);
     }
 
     @Override

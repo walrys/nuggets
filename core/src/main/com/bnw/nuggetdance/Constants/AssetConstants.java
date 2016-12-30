@@ -40,6 +40,9 @@ public final class AssetConstants {
     public static final String SPR_BONE_ARM_RIGHT_7 = new String("art/player/bone/spr_player_arm_right_7.png");
     public static final String SPR_BONE_ARM_RIGHT_8 = new String("art/player/bone/spr_player_arm_right_8.png");
 
+    public static final String SPR_DEMO_BODY = new String("art/demonstrator/spr_demo_body.png");
+
+
     // Sound asset filepath
 
     // DanceMusic asset filepath

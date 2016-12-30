@@ -52,6 +52,7 @@ public class Nuggets extends Game {
 		assetManager.load(AssetConstants.SPR_BONE_ARM_RIGHT_6, Texture.class);
 		assetManager.load(AssetConstants.SPR_BONE_ARM_RIGHT_7, Texture.class);
 		assetManager.load(AssetConstants.SPR_BONE_ARM_RIGHT_8, Texture.class);
+		assetManager.load(AssetConstants.SPR_DEMO_BODY, Texture.class);
 
 		assetManager.load(AssetConstants.MUSIC_SOUL_BOSSA, Music.class);
 		assetManager.finishLoading();

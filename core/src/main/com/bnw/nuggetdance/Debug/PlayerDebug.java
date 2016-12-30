@@ -1,6 +1,7 @@
 package com.bnw.nuggetdance.Debug;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -8,94 +9,80 @@ import com.bnw.nuggetdance.Constants.ApplicationConstants;
 import com.bnw.nuggetdance.Constants.AssetConstants;
 import com.bnw.nuggetdance.Music.DanceMusic;
 import com.bnw.nuggetdance.Nuggets;
+import com.bnw.nuggetdance.Sprites.Nugget;
 
 
 /**
  * Created by Walrus on 12/29/2016.
  */
 
-public class PlayerDebug extends Sprite {
+public class PlayerDebug extends Sprite implements Nugget{
     private boolean bob = false;
     private AssetManager assetManager;
     private long timer = 0;
     private Nuggets game;
-    private Texture leftArm, rightArm;
+    private String leftArm, rightArm;
     
     public PlayerDebug(Nuggets game, AssetManager assetManager){
         super(assetManager.get(AssetConstants.SPR_PLAYER_BONE, Texture.class));
         this.assetManager = assetManager;
+        this.leftArm = new String(AssetConstants.SPR_BONE_ARM_LEFT_0);
+        this.rightArm = new String(AssetConstants.SPR_BONE_ARM_RIGHT_0);
         setArmTexture(true, 0);
         setArmTexture(false, 0);
         this.game = game;
         setPosition(ApplicationConstants.WIDTH/2 - getWidth()/2,ApplicationConstants.HEIGHT/2 - getHeight()/2);
     }
     
-    public void setArmTexture(boolean isLeft, int armPosition){
+    public String setArmTexture(boolean isLeft, int armPosition){
         if(isLeft) {
             switch (armPosition) {
                 case 0:
-                    leftArm = assetManager.get(AssetConstants.SPR_BONE_ARM_LEFT_0, Texture.class);
-                    break;
+                    return AssetConstants.SPR_BONE_ARM_LEFT_0;
                 case 1:
-                    leftArm = assetManager.get(AssetConstants.SPR_BONE_ARM_LEFT_1, Texture.class);
-                    break;
+                    return AssetConstants.SPR_BONE_ARM_LEFT_1;
                 case 2:
-                    leftArm = assetManager.get(AssetConstants.SPR_BONE_ARM_LEFT_2, Texture.class);
-                    break;
+                    return AssetConstants.SPR_BONE_ARM_LEFT_2;
                 case 3:
-                    leftArm = assetManager.get(AssetConstants.SPR_BONE_ARM_LEFT_3, Texture.class);
-                    break;
+                    return AssetConstants.SPR_BONE_ARM_LEFT_3;
                 case 4:
-                    leftArm = assetManager.get(AssetConstants.SPR_BONE_ARM_LEFT_4, Texture.class);
-                    break;
+                    return AssetConstants.SPR_BONE_ARM_LEFT_4;
                 case 5:
-                    leftArm = assetManager.get(AssetConstants.SPR_BONE_ARM_LEFT_5, Texture.class);
-                    break;
+                    return AssetConstants.SPR_BONE_ARM_LEFT_5;
                 case 6:
-                    leftArm = assetManager.get(AssetConstants.SPR_BONE_ARM_LEFT_6, Texture.class);
-                    break;
+                    return AssetConstants.SPR_BONE_ARM_LEFT_6;
                 case 7:
-                    leftArm = assetManager.get(AssetConstants.SPR_BONE_ARM_LEFT_7, Texture.class);
-                    break;
+                    return AssetConstants.SPR_BONE_ARM_LEFT_7;
                 case 8:
-                    leftArm = assetManager.get(AssetConstants.SPR_BONE_ARM_LEFT_8, Texture.class);
-                    break;
+                    return AssetConstants.SPR_BONE_ARM_LEFT_8;
             }
         }
         else {
             switch (armPosition) {
                 case 0:
-                    rightArm = assetManager.get(AssetConstants.SPR_BONE_ARM_RIGHT_0, Texture.class);
-                    break;
+                    return AssetConstants.SPR_BONE_ARM_RIGHT_0;
                 case 1:
-                    rightArm = assetManager.get(AssetConstants.SPR_BONE_ARM_RIGHT_1, Texture.class);
-                    break;
+                    return AssetConstants.SPR_BONE_ARM_RIGHT_1;
                 case 2:
-                    rightArm = assetManager.get(AssetConstants.SPR_BONE_ARM_RIGHT_2, Texture.class);
-                    break;
+                    return AssetConstants.SPR_BONE_ARM_RIGHT_2;
                 case 3:
-                    rightArm = assetManager.get(AssetConstants.SPR_BONE_ARM_RIGHT_3, Texture.class);
-                    break;
+                    return AssetConstants.SPR_BONE_ARM_RIGHT_3;
                 case 4:
-                    rightArm = assetManager.get(AssetConstants.SPR_BONE_ARM_RIGHT_4, Texture.class);
-                    break;
+                    return AssetConstants.SPR_BONE_ARM_RIGHT_4;
                 case 5:
-                    rightArm = assetManager.get(AssetConstants.SPR_BONE_ARM_RIGHT_5, Texture.class);
-                    break;
+                    return AssetConstants.SPR_BONE_ARM_RIGHT_5;
                 case 6:
-                    rightArm = assetManager.get(AssetConstants.SPR_BONE_ARM_RIGHT_6, Texture.class);
-                    break;
+                    return AssetConstants.SPR_BONE_ARM_RIGHT_6;
                 case 7:
-                    rightArm = assetManager.get(AssetConstants.SPR_BONE_ARM_RIGHT_7, Texture.class);
-                    break;
+                    return AssetConstants.SPR_BONE_ARM_RIGHT_7;
                 case 8:
-                    rightArm = assetManager.get(AssetConstants.SPR_BONE_ARM_RIGHT_8, Texture.class);
-                    break;
+                    return AssetConstants.SPR_BONE_ARM_RIGHT_8;
             }
         }
+        return null;
     }
 
-    public void update(float dt, DanceMusic danceMusic){
+    public void update(float dt, DanceMusic danceMusic, OrthographicCamera gameCam){
         /*timer++;
         if(timer%ApplicationConstants.BOUNCE_SPEED == 0) {
             bob = !bob;
@@ -109,19 +96,19 @@ public class PlayerDebug extends Sprite {
 
         float x_offset = ApplicationConstants.WIDTH/2 - getWidth()/2;
         if(bob)
-            setPosition(x_offset - game.gameCam.position.x,ApplicationConstants.HEIGHT/2 - getHeight()/2);
+            setPosition(x_offset - gameCam.position.x,ApplicationConstants.HEIGHT/2 - getHeight()/2);
         else
-            setPosition(x_offset - game.gameCam.position.x,ApplicationConstants.HEIGHT/2 - getHeight()/2 - ApplicationConstants.BOUNCE_HEIGHT);
+            setPosition(x_offset - gameCam.position.x,ApplicationConstants.HEIGHT/2 - getHeight()/2 - ApplicationConstants.BOUNCE_HEIGHT);
 
-        setArmTexture(true,InterfaceDebug.currentLeftArmPosition);
-        setArmTexture(false,InterfaceDebug.currentRightArmPosition);
+        leftArm = setArmTexture(true,InterfaceDebug.currentLeftArmPosition);
+        rightArm = setArmTexture(false,InterfaceDebug.currentRightArmPosition);
     }
 
-    public void draw(Batch batch){
+    public void draw(Batch batch, AssetManager assetManager){
         batch.begin();
         super.draw(batch);
-        batch.draw(leftArm,getX(),getY());
-        batch.draw(rightArm,getX(),getY());
+        batch.draw(assetManager.get(leftArm, Texture.class),getX(),getY());
+        batch.draw(assetManager.get(rightArm, Texture.class),getX(),getY());
         batch.end();
     }
 }

@@ -76,6 +76,6 @@ public class DanceMusic {
     }
 
     public void dispose()   {
-
+        metronome.stop();
     }
 }

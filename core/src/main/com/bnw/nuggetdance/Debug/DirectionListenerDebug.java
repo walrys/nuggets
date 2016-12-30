@@ -25,11 +25,11 @@ public class DirectionListenerDebug extends InputListener{
         System.out.println(textButton.getLabel().getText() + " Pressed");
         if (direction == 0) {
             InterfaceDebug.currentLeftButtonPosition.setText(InterfaceDebug.labelStrings.get(index));
-            InterfaceDebug.setCurrentArmPosition(index, 0);
+            InterfaceDebug.setPlayerCurrentArmPosition(index, 0);
             System.out.println(index);
         } else if (direction == 1)  {
             InterfaceDebug.currentRightButtonPosition.setText(InterfaceDebug.labelStrings.get(index));
-            InterfaceDebug.setCurrentArmPosition(index, 1);
+            InterfaceDebug.setPlayerCurrentArmPosition(index, 1);
             System.out.println(index);
         }
         return super.touchDown(event, x, y, pointer, button);
@@ -47,10 +47,10 @@ public class DirectionListenerDebug extends InputListener{
         System.out.println(textButton.getLabel().getText() + " Exited");
         if (direction == 0) {
             InterfaceDebug.currentLeftButtonPosition.setText(InterfaceDebug.labelStrings.get(0));
-            InterfaceDebug.setCurrentArmPosition(0, 0);
+            InterfaceDebug.setPlayerCurrentArmPosition(0, 0);
         } else if (direction == 1)  {
             InterfaceDebug.currentRightButtonPosition.setText(InterfaceDebug.labelStrings.get(0));
-            InterfaceDebug.setCurrentArmPosition(0, 1);
+            InterfaceDebug.setPlayerCurrentArmPosition(0, 1);
         }
         super.exit(event, x, y, pointer, toActor);
     }

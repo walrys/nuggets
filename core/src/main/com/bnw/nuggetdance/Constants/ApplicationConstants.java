@@ -8,7 +8,7 @@ public final class ApplicationConstants {
     //Application Window setup
     public static final int WIDTH = 480;
     public static final int HEIGHT = 800;
-    public static final String TITLE = "Nugget Dance";
+    public static final String TITLE = "PlayerNugget Dance";
 
     //Player Constants
     public static final int BOUNCE_HEIGHT = 15;

@@ -208,7 +208,7 @@ public class InterfaceDebug {
         return demoRightPosition;
     }
 
-    public static void setCurrentArmPosition(int position, int arm){
+    public static void setPlayerCurrentArmPosition(int position, int arm){
         if(arm == 0){
             currentLeftArmPosition = position;
         }
