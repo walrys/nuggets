@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.bnw.nuggetdance.Backgrounds.PlayBackground;
 import com.bnw.nuggetdance.Music.DanceMusic;
+import com.bnw.nuggetdance.Debug.PlayerDebug;
 import com.bnw.nuggetdance.Nuggets;
 import com.bnw.nuggetdance.Sprites.Demonstrator;
 
@@ -16,6 +17,7 @@ public class PlayScreen implements Screen {
     private Nuggets game;
 
     private PlayBackground playBackGround;
+    private PlayerDebug player;
 
     private Demonstrator demo;
     private DanceMusic danceMusic;
@@ -27,6 +29,7 @@ public class PlayScreen implements Screen {
 
         this.demo = new Demonstrator(this.game.debugInterface);
         this.danceMusic = new DanceMusic(game);
+        player = new PlayerDebug(game, game.assetManager);
     }
 
     @Override
@@ -49,6 +52,7 @@ public class PlayScreen implements Screen {
 
         // render debug
         game.debugInterface.render();
+        player.draw(game.batch);
 
         // update game camera
         game.gameCam.update();
@@ -69,6 +73,9 @@ public class PlayScreen implements Screen {
 
         // update move generator
         demo.update(dt, danceMusic);
+
+        // update player
+        player.update(dt);
     }
 
     @Override

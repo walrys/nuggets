@@ -29,6 +29,9 @@ public class InterfaceDebug {
     protected static Label currentLeftButtonPosition;
     private Label demoLeftPosition;
     private Label demoRightPosition;
+
+    protected static int currentLeftArmPosition;
+    protected static int currentRightArmPosition;
     private Stage stage;
     private Viewport viewPort;
     private Table controlsTableTop;
@@ -62,13 +65,13 @@ public class InterfaceDebug {
         // define label strings
         this.labelStrings = new ArrayList<String>();
         labelStrings.add("NONE");
-        labelStrings.add("NORTHWEST");
-        labelStrings.add("NORTH");
-        labelStrings.add("NORTHEAST");
         labelStrings.add("WEST");
         labelStrings.add("EAST");
-        labelStrings.add("SOUTHWEST");
+        labelStrings.add("NORTH");
         labelStrings.add("SOUTH");
+        labelStrings.add("NORTHWEST");
+        labelStrings.add("NORTHEAST");
+        labelStrings.add("SOUTHWEST");
         labelStrings.add("SOUTHEAST");
 
         // define label
@@ -88,24 +91,24 @@ public class InterfaceDebug {
 
         // add left side buttons
         this.leftButtons = new ArrayList<TextButton>();
-        leftButtons.add(new TextButton("NORTH WEST", buttonStyle));
-        leftButtons.add(new TextButton("NORTH", buttonStyle));
-        leftButtons.add(new TextButton("NORTH EAST", buttonStyle));
         leftButtons.add(new TextButton("WEST", buttonStyle));
         leftButtons.add(new TextButton("EAST", buttonStyle));
-        leftButtons.add(new TextButton("SOUTH WEST", buttonStyle));
+        leftButtons.add(new TextButton("NORTH", buttonStyle));
         leftButtons.add(new TextButton("SOUTH", buttonStyle));
+        leftButtons.add(new TextButton("NORTH WEST", buttonStyle));
+        leftButtons.add(new TextButton("NORTH EAST", buttonStyle));
+        leftButtons.add(new TextButton("SOUTH WEST", buttonStyle));
         leftButtons.add(new TextButton("SOUTH EAST", buttonStyle));
 
         // add right side buttons
         this.rightButtons = new ArrayList<TextButton>();
-        rightButtons.add(new TextButton("NORTH WEST", buttonStyle));
-        rightButtons.add(new TextButton("NORTH", buttonStyle));
-        rightButtons.add(new TextButton("NORTH EAST", buttonStyle));
         rightButtons.add(new TextButton("WEST", buttonStyle));
         rightButtons.add(new TextButton("EAST", buttonStyle));
-        rightButtons.add(new TextButton("SOUTH WEST", buttonStyle));
+        rightButtons.add(new TextButton("NORTH", buttonStyle));
         rightButtons.add(new TextButton("SOUTH", buttonStyle));
+        rightButtons.add(new TextButton("NORTH WEST", buttonStyle));
+        rightButtons.add(new TextButton("NORTH EAST", buttonStyle));
+        rightButtons.add(new TextButton("SOUTH WEST", buttonStyle));
         rightButtons.add(new TextButton("SOUTH EAST", buttonStyle));
 
         // modify button size
@@ -136,29 +139,29 @@ public class InterfaceDebug {
         this.controlsTableTop.bottom();
         this.controlsTableTop.setFillParent(true);
 
-        this.controlsTableTop.add(leftButtons.get(0).pad(5, 5, 5, 5)).pad(10, 1, 170, 1).width(77.5f);
-        this.controlsTableTop.add(leftButtons.get(1).pad(5, 5, 5, 5)).pad(10, 1, 170, 1).width(77.5f);
+        this.controlsTableTop.add(leftButtons.get(4).pad(5, 5, 5, 5)).pad(10, 1, 170, 1).width(77.5f);
         this.controlsTableTop.add(leftButtons.get(2).pad(5, 5, 5, 5)).pad(10, 1, 170, 1).width(77.5f);
-        this.controlsTableTop.add(rightButtons.get(0).pad(5, 5, 5, 5)).pad(10, 1, 170, 1).width(77.5f);
-        this.controlsTableTop.add(rightButtons.get(1).pad(5, 5, 5, 5)).pad(10, 1, 170, 1).width(77.5f);
+        this.controlsTableTop.add(leftButtons.get(5).pad(5, 5, 5, 5)).pad(10, 1, 170, 1).width(77.5f);
+        this.controlsTableTop.add(rightButtons.get(4).pad(5, 5, 5, 5)).pad(10, 1, 170, 1).width(77.5f);
         this.controlsTableTop.add(rightButtons.get(2).pad(5, 5, 5, 5)).pad(10, 1, 170, 1).width(77.5f);
+        this.controlsTableTop.add(rightButtons.get(5).pad(5, 5, 5, 5)).pad(10, 1, 170, 1).width(77.5f);
 
         //this.controlsTableCentre.debugAll();
         this.controlsTableCentre.bottom();
         this.controlsTableCentre.setFillParent(true);
-        this.controlsTableCentre.add(leftButtons.get(3).pad(5, 5, 5, 5)).pad(10, 0, 120, 42).width(77.5f);
-        this.controlsTableCentre.add(leftButtons.get(4).pad(5, 5, 5, 5)).pad(10, 42, 120, 0).width(77.5f);
-        this.controlsTableCentre.add(rightButtons.get(3).pad(5, 5, 5, 5)).pad(10, 0, 120, 42).width(77.5f);
-        this.controlsTableCentre.add(rightButtons.get(4).pad(5, 5, 5, 5)).pad(10, 42, 120, 0).width(77.5f);
+        this.controlsTableCentre.add(leftButtons.get(0).pad(5, 5, 5, 5)).pad(10, 0, 120, 42).width(77.5f);
+        this.controlsTableCentre.add(leftButtons.get(1).pad(5, 5, 5, 5)).pad(10, 42, 120, 0).width(77.5f);
+        this.controlsTableCentre.add(rightButtons.get(0).pad(5, 5, 5, 5)).pad(10, 0, 120, 42).width(77.5f);
+        this.controlsTableCentre.add(rightButtons.get(1).pad(5, 5, 5, 5)).pad(10, 42, 120, 0).width(77.5f);
 
         //this.controlsTableBottom.debugAll();
         this.controlsTableBottom.bottom();
         this.controlsTableBottom.setFillParent(true);
-        this.controlsTableBottom.add(leftButtons.get(5).pad(5, 5, 5, 5)).pad(10, 1, 60, 1).width(77.5f);
         this.controlsTableBottom.add(leftButtons.get(6).pad(5, 5, 5, 5)).pad(10, 1, 60, 1).width(77.5f);
+        this.controlsTableBottom.add(leftButtons.get(3).pad(5, 5, 5, 5)).pad(10, 1, 60, 1).width(77.5f);
         this.controlsTableBottom.add(leftButtons.get(7).pad(5, 5, 5, 5)).pad(10, 1, 60, 1).width(77.5f);
-        this.controlsTableBottom.add(rightButtons.get(5).pad(5, 5, 5, 5)).pad(10, 1, 60, 1).width(77.5f);
         this.controlsTableBottom.add(rightButtons.get(6).pad(5, 5, 5, 5)).pad(10, 1, 60, 1).width(77.5f);
+        this.controlsTableBottom.add(rightButtons.get(3).pad(5, 5, 5, 5)).pad(10, 1, 60, 1).width(77.5f);
         this.controlsTableBottom.add(rightButtons.get(7).pad(5, 5, 5, 5)).pad(10, 1, 60, 1).width(77.5f);
 
         this.debugTableInfo.debugAll();
@@ -185,6 +188,15 @@ public class InterfaceDebug {
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 60f));
         stage.draw();
         return true;
+    }
+
+    public static void setCurrentArmPosition(int position, int arm){
+        if(arm == 0){
+            currentLeftArmPosition = position;
+        }
+        else {
+            currentRightArmPosition = position;
+        }
     }
 
     public void dispose()   {

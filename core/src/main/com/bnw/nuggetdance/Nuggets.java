@@ -33,6 +33,26 @@ public class Nuggets extends Game {
 		assetManager.load(AssetConstants.BACKGROUND_MAIN_1, Texture.class);
 		assetManager.load(AssetConstants.BACKGROUND_PLAY_1, Texture.class);
 		assetManager.load(AssetConstants.BACKGROUND_PLAY_2, Texture.class);
+		assetManager.load(AssetConstants.SPR_PLAYER_BONE, Texture.class);
+		assetManager.load(AssetConstants.SPR_BONE_ARM_LEFT_0, Texture.class);
+		assetManager.load(AssetConstants.SPR_BONE_ARM_LEFT_1, Texture.class);
+		assetManager.load(AssetConstants.SPR_BONE_ARM_LEFT_2, Texture.class);
+		assetManager.load(AssetConstants.SPR_BONE_ARM_LEFT_3, Texture.class);
+		assetManager.load(AssetConstants.SPR_BONE_ARM_LEFT_4, Texture.class);
+		assetManager.load(AssetConstants.SPR_BONE_ARM_LEFT_5, Texture.class);
+		assetManager.load(AssetConstants.SPR_BONE_ARM_LEFT_6, Texture.class);
+		assetManager.load(AssetConstants.SPR_BONE_ARM_LEFT_7, Texture.class);
+		assetManager.load(AssetConstants.SPR_BONE_ARM_LEFT_8, Texture.class);
+		assetManager.load(AssetConstants.SPR_BONE_ARM_RIGHT_0, Texture.class);
+		assetManager.load(AssetConstants.SPR_BONE_ARM_RIGHT_1, Texture.class);
+		assetManager.load(AssetConstants.SPR_BONE_ARM_RIGHT_2, Texture.class);
+		assetManager.load(AssetConstants.SPR_BONE_ARM_RIGHT_3, Texture.class);
+		assetManager.load(AssetConstants.SPR_BONE_ARM_RIGHT_4, Texture.class);
+		assetManager.load(AssetConstants.SPR_BONE_ARM_RIGHT_5, Texture.class);
+		assetManager.load(AssetConstants.SPR_BONE_ARM_RIGHT_6, Texture.class);
+		assetManager.load(AssetConstants.SPR_BONE_ARM_RIGHT_7, Texture.class);
+		assetManager.load(AssetConstants.SPR_BONE_ARM_RIGHT_8, Texture.class);
+
 		assetManager.load(AssetConstants.MUSIC_SOUL_BOSSA, Music.class);
 		assetManager.finishLoading();
 

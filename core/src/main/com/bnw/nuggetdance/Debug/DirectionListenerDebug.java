@@ -25,8 +25,12 @@ public class DirectionListenerDebug extends InputListener{
         System.out.println(textButton.getLabel().getText() + " Pressed");
         if (direction == 0) {
             InterfaceDebug.currentLeftButtonPosition.setText(InterfaceDebug.labelStrings.get(index));
+            InterfaceDebug.setCurrentArmPosition(index, 0);
+            System.out.println(index);
         } else if (direction == 1)  {
             InterfaceDebug.currentRightButtonPosition.setText(InterfaceDebug.labelStrings.get(index));
+            InterfaceDebug.setCurrentArmPosition(index, 1);
+            System.out.println(index);
         }
         return super.touchDown(event, x, y, pointer, button);
     }

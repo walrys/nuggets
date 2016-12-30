@@ -10,4 +10,7 @@ public final class ApplicationConstants {
     public static final int HEIGHT = 800;
     public static final String TITLE = "Nugget Dance";
 
+    //Player Constants
+    public static final int BOUNCE_HEIGHT = 15;
+    public static final int BOUNCE_SPEED = 10;
 }
