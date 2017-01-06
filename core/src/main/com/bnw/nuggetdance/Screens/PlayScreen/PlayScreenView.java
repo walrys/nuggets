@@ -42,6 +42,7 @@ public class PlayScreenView implements Screen {
         // render play background
         playBackGround.draw(game.batch);
 
+
         // calls draw on model
         model.draw();
 

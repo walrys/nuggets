@@ -12,6 +12,7 @@ import com.bnw.nuggetdance.Constants.ApplicationConstants;
 import com.bnw.nuggetdance.Constants.AssetConstants;
 import com.bnw.nuggetdance.Debug.InputHandlerDebug;
 import com.bnw.nuggetdance.Debug.InterfaceDebug;
+import com.bnw.nuggetdance.Screens.Box2dScreen;
 import com.bnw.nuggetdance.Screens.MainScreen;
 
 public class Nuggets extends Game {
@@ -60,7 +61,8 @@ public class Nuggets extends Game {
 		debugInterface = new InterfaceDebug(batch);
 		debugInputHandler = new InputHandlerDebug(debugInterface);
 
-		setScreen(new MainScreen(this));
+		setScreen(new Box2dScreen(this));
+		//setScreen(new MainScreen(this));
 	}
 
 	@Override
