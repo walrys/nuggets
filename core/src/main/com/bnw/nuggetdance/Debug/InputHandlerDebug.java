@@ -5,7 +5,7 @@ import com.badlogic.gdx.Input;
 import com.bnw.nuggetdance.Backgrounds.PlayBackground;
 import com.bnw.nuggetdance.Constants.ApplicationConstants;
 import com.bnw.nuggetdance.Screens.MainScreen;
-import com.bnw.nuggetdance.Screens.PlayScreen;
+import com.bnw.nuggetdance.Screens.PlayScreen.PlayScreenView;
 
 /**
  * Created by Brandon on 23/12/16.
@@ -17,7 +17,7 @@ public class InputHandlerDebug {
         this.debugInterface = debugInterface;
     }
 
-    public void handleTouchInput(float dt, PlayScreen screen)   {
+    public void handleTouchInput(float dt, PlayScreenView screen)   {
         PlayBackground background = screen.getPlayBackground();
         float xShift = 0;
 
@@ -36,7 +36,7 @@ public class InputHandlerDebug {
 
     public void handleTouchInput(float dt, MainScreen screen)    {
         if(Gdx.input.isTouched()){
-            screen.getGame().setScreen(new PlayScreen(screen.getGame()));
+            screen.getGame().setScreen(new PlayScreenView(screen.getGame()));
             Gdx.input.setInputProcessor(screen.getGame().debugInterface.getStage());
             screen.dispose();
         }

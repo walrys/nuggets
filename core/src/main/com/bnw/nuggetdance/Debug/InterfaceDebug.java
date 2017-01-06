@@ -29,6 +29,7 @@ public class InterfaceDebug {
     protected static Label currentLeftButtonPosition;
     private Label demoLeftPosition;
     private Label demoRightPosition;
+    private Label matchCount;
 
     protected static int currentLeftArmPosition;
     protected static int currentRightArmPosition;
@@ -82,6 +83,8 @@ public class InterfaceDebug {
 
         this.demoLeftPosition = new Label("NONE", debugLabelStyle);
         this.demoRightPosition = new Label("NONE", debugLabelStyle);
+
+        this.matchCount = new Label("NO MATCH", debugLabelStyle);
 
         // adding a button style
         this.skin.addRegions(buttonTexture);
@@ -172,8 +175,12 @@ public class InterfaceDebug {
 
         this.debugTableInfo.row();
 
-        this.debugTableInfo.add(demoLeftPosition).pad(100, 0, 0, 100);
-        this.debugTableInfo.add(demoRightPosition).pad(100, 100, 0, 0);
+        this.debugTableInfo.add(matchCount).pad(50, 0, 50, 0);
+
+        this.debugTableInfo.row();
+
+        this.debugTableInfo.add(demoLeftPosition).pad(0, 0, 0, 100);
+        this.debugTableInfo.add(demoRightPosition).pad(0, 100, 0, 0);
 
         stage.addActor(this.controlsTableTop);
         stage.addActor(this.controlsTableCentre);
@@ -215,5 +222,10 @@ public class InterfaceDebug {
         else {
             currentRightArmPosition = position;
         }
+    }
+
+    public String setPlayerMatch(String matchString)    {
+        matchCount.setText(matchString);
+        return matchCount.getText().toString();
     }
 }

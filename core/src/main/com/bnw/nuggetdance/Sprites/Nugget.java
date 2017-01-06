@@ -14,4 +14,5 @@ public interface Nugget {
     String setArmTexture(boolean isLeft, int armPosition);
     void update(float dt, DanceMusic danceMusic, OrthographicCamera gameCam);
     void draw(Batch batch, AssetManager assetManager);
+    String getArm(int arm);
 }

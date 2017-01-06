@@ -23,6 +23,9 @@ public class DemonstratorNugget extends Sprite implements Nugget   {
     private String currentRightMove;
     private String prevLeftMove;
     private String prevRightMove;
+
+    private int isCurrentMatched;
+    private int isPrevMatched;
     private ArrayList<String> moveStrings;
     private Random randomGenerator;
 
@@ -48,6 +51,9 @@ public class DemonstratorNugget extends Sprite implements Nugget   {
         this.prevLeftMove = "NONE";
         this.prevRightMove = "NONE";
 
+        this.isCurrentMatched = 1;
+        this.isPrevMatched = -1;
+
         // add array list of moves
         this.moveStrings.add("NONE");
         this.moveStrings.add("NORTHWEST");
@@ -61,7 +67,6 @@ public class DemonstratorNugget extends Sprite implements Nugget   {
 
 
         setScale(0.5f);
-        setPosition(ApplicationConstants.WIDTH/2 - getWidth()/2,ApplicationConstants.HEIGHT/2 + getHeight()*(3/4));
 
         this.bob = false;
         this.timer = 0;
@@ -71,18 +76,20 @@ public class DemonstratorNugget extends Sprite implements Nugget   {
         // update move generator
         if (danceMusic.isCorrectBeat()) {
             generateRandomMove(debugInterface);
+            isCurrentMatched = isPrevMatched;
         }
+
         if (danceMusic.getBeat() != timer)   {
             bob = !bob;
             timer = danceMusic.getBeat();
         }
 
         // move nugget
-        float x_offset = ApplicationConstants.WIDTH/2 - getWidth()/2;
+        float x_offset = ApplicationConstants.WIDTH*0.5f - getWidth();
         if(bob)
-            setPosition(x_offset - gameCam.position.x,ApplicationConstants.HEIGHT/2 + getHeight()*(3/4));
+            setPosition(x_offset - gameCam.position.x,ApplicationConstants.HEIGHT*0.625f - getHeight());
         else
-            setPosition(x_offset - gameCam.position.x,ApplicationConstants.HEIGHT/2 + getHeight()*(3/4) - ApplicationConstants.BOUNCE_HEIGHT);
+            setPosition(x_offset - gameCam.position.x,ApplicationConstants.HEIGHT*0.625f - getHeight() - ApplicationConstants.BOUNCE_HEIGHT);
     }
 
     public boolean generateRandomMove(InterfaceDebug debugInterface) {
@@ -109,7 +116,7 @@ public class DemonstratorNugget extends Sprite implements Nugget   {
         leftArm = setArmTexture(true, randomLeftIndex);
         rightArm = setArmTexture(false, randomRightIndex);
 
-        return true;
+        return false;
     }
 
     public boolean isMoveEquals(String firstString, String secondString) {
@@ -169,8 +176,35 @@ public class DemonstratorNugget extends Sprite implements Nugget   {
     public void draw(Batch batch, AssetManager assetManager) {
         batch.begin();
         super.draw(batch);
-        batch.draw(assetManager.get(leftArm, Texture.class), getX()+(float) ApplicationConstants.WIDTH*(0.13f), getY()+(float) ApplicationConstants.HEIGHT*(0.1f));
-        batch.draw(assetManager.get(rightArm, Texture.class), getX()+(float) ApplicationConstants.WIDTH*(0.13f), getY()+(float) ApplicationConstants.HEIGHT*(0.1f));
+        batch.draw(assetManager.get(leftArm, Texture.class), getX()*0.75f, getY() + ApplicationConstants.HEIGHT*0.1f);
+        batch.draw(assetManager.get(rightArm, Texture.class), getX()*0.75f, getY() + ApplicationConstants.HEIGHT*0.1f);
         batch.end();
+    }
+
+    @Override
+    public String getArm(int arm) {
+        String armName = new String();
+        if (arm == 0)   {
+            armName = leftArm;
+        } else if (arm == 1)    {
+            armName = rightArm;
+        }
+        return armName;
+    }
+
+    public int getMatchCurrent()    {
+        return isCurrentMatched;
+    }
+
+    public int getMatchPrev()   {
+        return isPrevMatched;
+    }
+
+    public void setMatchCurrent(int isMatched) {
+        this.isCurrentMatched = isMatched;
+    }
+
+    public void setMatchPrev(int isMatched) {
+        this.isPrevMatched = isMatched;
     }
 }

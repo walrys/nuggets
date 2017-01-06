@@ -94,11 +94,11 @@ public class PlayerDebug extends Sprite implements Nugget{
             bob = !bob;
         }
 
-        float x_offset = ApplicationConstants.WIDTH/2 - getWidth()/2;
+        float x_offset = ApplicationConstants.WIDTH*0.375f - getWidth();
         if(bob)
-            setPosition(x_offset - gameCam.position.x,ApplicationConstants.HEIGHT/2 - getHeight()/2);
+            setPosition(x_offset - gameCam.position.x,ApplicationConstants.HEIGHT*0.25f - getHeight());
         else
-            setPosition(x_offset - gameCam.position.x,ApplicationConstants.HEIGHT/2 - getHeight()/2 - ApplicationConstants.BOUNCE_HEIGHT);
+            setPosition(x_offset - gameCam.position.x,ApplicationConstants.HEIGHT*0.25f - getHeight() - ApplicationConstants.BOUNCE_HEIGHT);
 
         leftArm = setArmTexture(true,InterfaceDebug.currentLeftArmPosition);
         rightArm = setArmTexture(false,InterfaceDebug.currentRightArmPosition);
@@ -110,5 +110,15 @@ public class PlayerDebug extends Sprite implements Nugget{
         batch.draw(assetManager.get(leftArm, Texture.class),getX(),getY());
         batch.draw(assetManager.get(rightArm, Texture.class),getX(),getY());
         batch.end();
+    }
+
+    public String getArm(int arm)   {
+        String armName = new String();
+        if (arm == 0)   {
+            armName = leftArm;
+        } else if (arm == 1)    {
+            armName = rightArm;
+        }
+        return armName;
     }
 }

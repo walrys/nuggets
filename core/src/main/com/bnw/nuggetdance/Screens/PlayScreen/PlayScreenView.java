@@ -1,35 +1,27 @@
-package com.bnw.nuggetdance.Screens;
+package com.bnw.nuggetdance.Screens.PlayScreen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.bnw.nuggetdance.Backgrounds.PlayBackground;
-import com.bnw.nuggetdance.Music.DanceMusic;
-import com.bnw.nuggetdance.Debug.PlayerDebug;
 import com.bnw.nuggetdance.Nuggets;
-import com.bnw.nuggetdance.Sprites.DemonstratorNugget;
 
 /**
  * Created by Walrus on 12/23/2016.
  */
 
-public class PlayScreen implements Screen {
+public class PlayScreenView implements Screen {
     private Nuggets game;
 
     private PlayBackground playBackGround;
-    private PlayerDebug player;
 
-    private DemonstratorNugget demo;
-    private DanceMusic danceMusic;
+    private PlayScreenModel model;
 
 
-    public PlayScreen(Nuggets game)  {
+    public PlayScreenView(Nuggets game)  {
         this.game = game;
         this.playBackGround = new PlayBackground(game.assetManager, game.gameCam);
-
-        this.demo = new DemonstratorNugget(this.game);
-        this.danceMusic = new DanceMusic(game);
-        player = new PlayerDebug(game, game.assetManager);
+        this.model = new PlayScreenModel(game, this);
     }
 
     @Override
@@ -50,37 +42,25 @@ public class PlayScreen implements Screen {
         // render play background
         playBackGround.draw(game.batch);
 
+        // calls draw on model
+        model.draw();
+
         // render debug
         game.debugInterface.render();
-
-        // render player
-        player.draw(game.batch, game.assetManager);
-
-        // render demo
-        demo.draw(game.batch, game.assetManager);
 
         // update game camera
         game.gameCam.update();
     }
 
 
-    public void update(float dt){
-        // play music
-        if (!danceMusic.isCurrentMusicPlaying()) {
-            danceMusic.randomizeMusic();
-            danceMusic.playCurrentMusic(false);
-        }
+    public void update(float dt)    {
+        // calls update on model
+        model.update(dt);
 
         // handle user input first
 
         // handles all debug controls
         game.debugInputHandler.handleTouchInput(dt, this);
-
-        // update player
-        player.update(dt, danceMusic, game.gameCam);
-
-        // update demo
-        demo.update(dt, danceMusic, game.gameCam);
     }
 
     @Override
