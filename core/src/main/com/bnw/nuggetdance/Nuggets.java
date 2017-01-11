@@ -11,7 +11,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.bnw.nuggetdance.Constants.ApplicationConstants;
 import com.bnw.nuggetdance.Constants.AssetConstants;
 import com.bnw.nuggetdance.Debug.InputHandlerDebug;
-import com.bnw.nuggetdance.Debug.InterfaceDebug;
+import com.bnw.nuggetdance.Debug.Interface.InterfacePlayDebug;
+import com.bnw.nuggetdance.Debug.Interface.InterfaceScoreDebug;
+import com.bnw.nuggetdance.Misc.Others.Timer;
 import com.bnw.nuggetdance.Screens.MainScreen;
 
 public class Nuggets extends Game {
@@ -21,7 +23,9 @@ public class Nuggets extends Game {
 	public Viewport gamePort;
 
 	public InputHandlerDebug debugInputHandler;
-	public InterfaceDebug debugInterface;
+	public InterfacePlayDebug debugPlayInterface;
+    public InterfaceScoreDebug debugScoreInterface;
+	public Timer alarm;
 
 	@Override
 	public void create () {
@@ -57,8 +61,17 @@ public class Nuggets extends Game {
 		assetManager.load(AssetConstants.MUSIC_SOUL_BOSSA, Music.class);
 		assetManager.finishLoading();
 
-		debugInterface = new InterfaceDebug(batch);
-		debugInputHandler = new InputHandlerDebug(debugInterface);
+		// create alarm object
+		alarm = new Timer();
+
+		// create debug play interface
+		debugPlayInterface = new InterfacePlayDebug(batch);
+
+		// create debug score interface
+        debugScoreInterface = new InterfaceScoreDebug(batch);
+
+		// create debug input handler
+		debugInputHandler = new InputHandlerDebug(debugPlayInterface);
 
 		setScreen(new MainScreen(this));
 	}
@@ -68,7 +81,7 @@ public class Nuggets extends Game {
 		super.dispose();
 		assetManager.dispose();
 		batch.dispose();
-		debugInterface.dispose();
+		debugPlayInterface.dispose();
 	}
 
 	@Override

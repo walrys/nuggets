@@ -1,4 +1,4 @@
-package com.bnw.nuggetdance.Debug;
+package com.bnw.nuggetdance.Debug.Interface;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import com.bnw.nuggetdance.Constants.ApplicationConstants;
+import com.bnw.nuggetdance.Debug.DirectionListenerDebug;
 
 import java.util.ArrayList;
 
@@ -23,16 +24,17 @@ import java.util.ArrayList;
  * Created by Brandon on 26/12/16.
  */
 
-public class InterfaceDebug {
-    protected static ArrayList<String> labelStrings;
-    protected static Label currentRightButtonPosition;
-    protected static Label currentLeftButtonPosition;
+public class InterfacePlayDebug {
+    public static ArrayList<String> labelStrings;
+    public static Label currentRightButtonPosition;
+    public static Label currentLeftButtonPosition;
     private Label demoLeftPosition;
     private Label demoRightPosition;
     private Label matchCount;
 
-    protected static int currentLeftArmPosition;
-    protected static int currentRightArmPosition;
+    public static int currentLeftArmPosition;
+    public static int currentRightArmPosition;
+
     private Stage stage;
     private Viewport viewPort;
     private Table controlsTableTop;
@@ -51,7 +53,7 @@ public class InterfaceDebug {
     private FPSLogger fps = new FPSLogger();
 
 
-    public InterfaceDebug(SpriteBatch sb) {
+    public InterfacePlayDebug(SpriteBatch sb) {
         this.viewPort = new FitViewport(ApplicationConstants.WIDTH, ApplicationConstants.HEIGHT, new OrthographicCamera());
         this.stage = new Stage(viewPort, sb);
         this.controlsTableTop = new Table();
@@ -191,7 +193,6 @@ public class InterfaceDebug {
     public boolean render()  {
         // print fps every second
         //fps.log();
-
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 60f));
         stage.draw();
         return true;

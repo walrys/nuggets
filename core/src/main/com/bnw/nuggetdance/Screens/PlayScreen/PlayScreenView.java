@@ -14,14 +14,16 @@ public class PlayScreenView implements Screen {
     private Nuggets game;
 
     private PlayBackground playBackGround;
-
     private PlayScreenModel model;
+
+    private int interfaceType;
 
 
     public PlayScreenView(Nuggets game)  {
         this.game = game;
         this.playBackGround = new PlayBackground(game.assetManager, game.gameCam);
         this.model = new PlayScreenModel(game, this);
+        this.interfaceType = 1;
     }
 
     @Override
@@ -45,8 +47,8 @@ public class PlayScreenView implements Screen {
         // calls draw on model
         model.draw();
 
-        // render debug
-        game.debugInterface.render();
+        // render interface
+        pickInterfaceToRender();
 
         // update game camera
         game.gameCam.update();
@@ -88,6 +90,21 @@ public class PlayScreenView implements Screen {
         playBackGround.dispose();
     }
 
+    public void pickInterfaceToRender()    {
+        switch (interfaceType)  {
+            case 0:
+            break;
+
+            case 1:
+            game.debugPlayInterface.render();
+            break;
+
+            case 2:
+            game.debugScoreInterface.render();
+            break;
+        }
+    }
+
     /*
      * Getters
      */
@@ -98,5 +115,14 @@ public class PlayScreenView implements Screen {
 
     public PlayBackground getPlayBackground()  {
         return playBackGround;
+    }
+
+    /*
+     * user interface type 0: no view
+     * user interface type 1: play view
+     * user interface type 1: score view
+     */
+    public void setInterfaceType(int interfaceType)  {
+        this.interfaceType = interfaceType;
     }
 }

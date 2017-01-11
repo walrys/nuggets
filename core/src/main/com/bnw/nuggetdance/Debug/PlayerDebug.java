@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.bnw.nuggetdance.Constants.ApplicationConstants;
 import com.bnw.nuggetdance.Constants.AssetConstants;
+import com.bnw.nuggetdance.Debug.Interface.InterfacePlayDebug;
 import com.bnw.nuggetdance.Music.DanceMusic;
 import com.bnw.nuggetdance.Nuggets;
 import com.bnw.nuggetdance.Sprites.Nugget;
@@ -100,8 +101,8 @@ public class PlayerDebug extends Sprite implements Nugget{
         else
             setPosition(x_offset - gameCam.position.x,ApplicationConstants.HEIGHT*0.25f - getHeight() - ApplicationConstants.BOUNCE_HEIGHT);
 
-        leftArm = setArmTexture(true,InterfaceDebug.currentLeftArmPosition);
-        rightArm = setArmTexture(false,InterfaceDebug.currentRightArmPosition);
+        leftArm = setArmTexture(true, InterfacePlayDebug.currentLeftArmPosition);
+        rightArm = setArmTexture(false, InterfacePlayDebug.currentRightArmPosition);
     }
 
     public void draw(Batch batch, AssetManager assetManager){

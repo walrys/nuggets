@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.bnw.nuggetdance.Constants.ApplicationConstants;
 import com.bnw.nuggetdance.Constants.AssetConstants;
-import com.bnw.nuggetdance.Debug.InterfaceDebug;
+import com.bnw.nuggetdance.Debug.Interface.InterfacePlayDebug;
 import com.bnw.nuggetdance.Music.DanceMusic;
 import com.bnw.nuggetdance.Nuggets;
 
@@ -29,9 +29,12 @@ public class DemonstratorNugget extends Sprite implements Nugget   {
     private ArrayList<String> moveStrings;
     private Random randomGenerator;
 
-    private InterfaceDebug debugInterface;
+    private InterfacePlayDebug debugInterface;
     private boolean bob;
     private long timer;
+
+    private float hitMoveCount;
+    private float totalMoveCount;
 
     private String leftArm, rightArm;
 
@@ -43,7 +46,7 @@ public class DemonstratorNugget extends Sprite implements Nugget   {
 
         this.moveStrings = new ArrayList<String>();
         this.randomGenerator = new Random();
-        this.debugInterface = game.debugInterface;
+        this.debugInterface = game.debugPlayInterface;
 
         this.currentLeftMove = "NONE";
         this.currentRightMove = "NONE";
@@ -65,6 +68,9 @@ public class DemonstratorNugget extends Sprite implements Nugget   {
         this.moveStrings.add("SOUTH");
         this.moveStrings.add("SOUTHEAST");
 
+        // set how many moves are hit and total moves
+        this.hitMoveCount = 0;
+        this.totalMoveCount = 0;
 
         setScale(0.5f);
 
@@ -77,6 +83,7 @@ public class DemonstratorNugget extends Sprite implements Nugget   {
         if (danceMusic.isCorrectBeat()) {
             generateRandomMove(debugInterface);
             isCurrentMatched = isPrevMatched;
+            totalMoveCount += 1;
         }
 
         if (danceMusic.getBeat() != timer)   {
@@ -92,7 +99,7 @@ public class DemonstratorNugget extends Sprite implements Nugget   {
             setPosition(x_offset - gameCam.position.x,ApplicationConstants.HEIGHT*0.625f - getHeight() - ApplicationConstants.BOUNCE_HEIGHT);
     }
 
-    public boolean generateRandomMove(InterfaceDebug debugInterface) {
+    public boolean generateRandomMove(InterfacePlayDebug debugInterface) {
         prevLeftMove = currentLeftMove;
         prevRightMove = currentRightMove;
         int randomLeftIndex = 0;
@@ -192,12 +199,33 @@ public class DemonstratorNugget extends Sprite implements Nugget   {
         return armName;
     }
 
+    public void resetCount() {
+        hitMoveCount = 0;
+        totalMoveCount = 0;
+    }
+
     public int getMatchCurrent()    {
         return isCurrentMatched;
     }
 
     public int getMatchPrev()   {
         return isPrevMatched;
+    }
+
+    public float getHitMoveCount()  {
+        return hitMoveCount;
+    }
+
+    public float getTotalMoveCount()  {
+        return totalMoveCount;
+    }
+
+    public void setHitMoveCount(float hitMoveCount)    {
+        this.hitMoveCount = hitMoveCount;
+    }
+
+    public void setTotalMoveCount(float totalMoveCount)  {
+        this.totalMoveCount = totalMoveCount;
     }
 
     public void setMatchCurrent(int isMatched) {
