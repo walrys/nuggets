@@ -14,7 +14,7 @@ import com.bnw.nuggetdance.Debug.InputHandlerDebug;
 import com.bnw.nuggetdance.Debug.Interface.InterfacePlayDebug;
 import com.bnw.nuggetdance.Debug.Interface.InterfaceScoreDebug;
 import com.bnw.nuggetdance.Misc.Others.Timer;
-import com.bnw.nuggetdance.Screens.MainScreen;
+import com.bnw.nuggetdance.Screens.Box2dScreen;
 
 public class Nuggets extends Game {
     public SpriteBatch batch;
@@ -73,7 +73,8 @@ public class Nuggets extends Game {
 		// create debug input handler
 		debugInputHandler = new InputHandlerDebug(debugPlayInterface);
 
-		setScreen(new MainScreen(this));
+		setScreen(new Box2dScreen(this));
+		//setScreen(new MainScreen(this));
 	}
 
 	@Override
