@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -13,11 +12,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.bnw.nuggetdance.Constants.ApplicationConstants;
-import com.bnw.nuggetdance.Constants.AssetConstants;
 import com.bnw.nuggetdance.Debug.DirectionListenerDebug;
 
 import java.util.ArrayList;
@@ -45,8 +42,8 @@ public class InterfacePlayDebug {
     private Table controlsTableBottom;
     private Table debugTableInfo;
 
-    private Touchpad knobLeft, knobRight;
-    private Touchpad.TouchpadStyle knobStyle;
+    /*private Touchpad knobLeft, knobRight;
+    private Touchpad.TouchpadStyle knobStyle;*/
 
     private Skin skin, knobSkin;
     private TextureAtlas buttonTexture;
@@ -67,6 +64,7 @@ public class InterfacePlayDebug {
         this.controlsTableBottom = new Table();
         this.debugTableInfo = new Table();
 
+        /*
         knobSkin = new Skin();
 
         knobSkin.add("knobBackground", new Texture(AssetConstants.SPR_UI_KNOBBG));
@@ -77,6 +75,7 @@ public class InterfacePlayDebug {
 
         this.knobLeft = new Touchpad(20f, knobStyle);
         this.knobRight = new Touchpad(20f, knobStyle);
+        */
 
         this.skin = new Skin();
         this.buttonStyle = new com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle();
@@ -208,10 +207,11 @@ public class InterfacePlayDebug {
         stage.addActor(this.controlsTableBottom);
         stage.addActor(this.debugTableInfo);
 
-        knobLeft.setPosition(0,ApplicationConstants.HEIGHT/2);
+
+        /*knobLeft.setPosition(0,ApplicationConstants.HEIGHT/2);
         knobRight.setPosition(ApplicationConstants.WIDTH/2,ApplicationConstants.HEIGHT/2);
         stage.addActor(this.knobLeft);
-        stage.addActor(this.knobRight);
+        stage.addActor(this.knobRight);*/
     }
 
     public boolean render()  {

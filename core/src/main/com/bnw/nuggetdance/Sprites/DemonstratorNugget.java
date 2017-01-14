@@ -110,16 +110,20 @@ public class DemonstratorNugget extends Sprite implements Nugget   {
         }
 
         // move nugget
+        bounce(gameCam);
+
+        System.out.println(timeMultipler);
+    }
+
+    private void bounce(OrthographicCamera gameCam) {
         float x_offset = ApplicationConstants.WIDTH*0.5f - getWidth();
         if(bob)
             setPosition(x_offset - gameCam.position.x,ApplicationConstants.HEIGHT*0.625f - getHeight());
         else
             setPosition(x_offset - gameCam.position.x,ApplicationConstants.HEIGHT*0.625f - getHeight() - ApplicationConstants.BOUNCE_HEIGHT);
-
-        
     }
 
-    public boolean generateRandomMove(InterfacePlayDebug debugInterface) {
+    private boolean generateRandomMove(InterfacePlayDebug debugInterface) {
         prevLeftMove = currentLeftMove;
         prevRightMove = currentRightMove;
         int randomLeftIndex = 0;
@@ -146,7 +150,7 @@ public class DemonstratorNugget extends Sprite implements Nugget   {
         return false;
     }
 
-    public boolean isMoveEquals(String firstString, String secondString) {
+    private boolean isMoveEquals(String firstString, String secondString) {
         return firstString.equalsIgnoreCase(secondString);
     }
 
@@ -200,15 +204,6 @@ public class DemonstratorNugget extends Sprite implements Nugget   {
     }
 
     @Override
-    public void draw(Batch batch, AssetManager assetManager) {
-        batch.begin();
-        super.draw(batch);
-        batch.draw(assetManager.get(leftArm, Texture.class), getX()*0.75f, getY() + ApplicationConstants.HEIGHT*0.1f);
-        batch.draw(assetManager.get(rightArm, Texture.class), getX()*0.75f, getY() + ApplicationConstants.HEIGHT*0.1f);
-        batch.end();
-    }
-
-    @Override
     public String getArm(int arm) {
         String armName = new String();
         if (arm == 0)   {
@@ -218,6 +213,15 @@ public class DemonstratorNugget extends Sprite implements Nugget   {
         }
         return armName;
     }
+
+     @Override
+     public void draw(Batch batch, AssetManager assetManager) {
+         batch.begin();
+         super.draw(batch);
+         batch.draw(assetManager.get(leftArm, Texture.class), getX()*0.75f, getY() + ApplicationConstants.HEIGHT*0.1f);
+         batch.draw(assetManager.get(rightArm, Texture.class), getX()*0.75f, getY() + ApplicationConstants.HEIGHT*0.1f);
+         batch.end();
+     }
 
     public void resetCount() {
         hitMoveCount = 0;

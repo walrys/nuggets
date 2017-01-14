@@ -6,6 +6,7 @@ import com.bnw.nuggetdance.Misc.Metronome.Metronome;
 import com.bnw.nuggetdance.Nuggets;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -14,16 +15,16 @@ import java.util.Random;
 
 public class DanceMusic {
 
-    private ArrayList<Music> danceMusic;
+    private HashMap<Integer, Music> danceMusic;
     private ArrayList<Integer> bpmList;
-    private Music currentMusic;
+    private int currentMusic;
     private Random randomizer;
     private Metronome metronome;
     private float moveTracker;
     private long prevBeat;
 
     public DanceMusic(Nuggets game) {
-        this.danceMusic = new ArrayList<Music>();
+        this.danceMusic = new HashMap<Integer, Music>();
         this.bpmList = new ArrayList<Integer>();
         this.randomizer = new Random();
         this.moveTracker = 0f;
@@ -31,33 +32,36 @@ public class DanceMusic {
         this.prevBeat = 0;
 
         // add dance music into game
-        this.danceMusic.add(game.assetManager.get(AssetConstants.MUSIC_SOUL_BOSSA, Music.class));
+        this.danceMusic.put(0, game.assetManager.get(AssetConstants.MUSIC_SOUL_BOSSA, Music.class));
         this.bpmList.add(147);
 
-        this.currentMusic = danceMusic.get(0);
-    }
-
-    public void randomizeMusic()    {
-        currentMusic = danceMusic.get(0);
+        this.currentMusic = 0;
     }
 
     public void playCurrentMusic(boolean isLoop)  {
-        currentMusic.setLooping(isLoop);
+        danceMusic.get(currentMusic).setLooping(isLoop);
 
-        currentMusic.play();
+        danceMusic.get(currentMusic).play();
         //currentMusic.setPosition(200);
 
         metronome.setBpm(bpmList.get(0));
         metronome.start();
     }
 
+
     public void stopCurrentMusic()  {
-        currentMusic.stop();
+        danceMusic.get(currentMusic).stop();
         metronome.stop();
     }
 
+    public void checkStopMusic()   {
+        if (danceMusic.get(currentMusic).getPosition() >= 56 && isCurrentMusicPlaying())  {
+            stopCurrentMusic();
+        }
+    }
+
     public boolean isCurrentMusicPlaying()   {
-        return currentMusic.isPlaying();
+        return danceMusic.get(currentMusic).isPlaying();
     }
 
     public long getBeat()    {

@@ -15,6 +15,7 @@ public class PlayScreenView implements Screen {
 
     private PlayBackground playBackGround;
     private PlayScreenModel model;
+    private PlayInterface playInterface;
 
     private int interfaceType;
 
@@ -23,6 +24,8 @@ public class PlayScreenView implements Screen {
         this.game = game;
         this.playBackGround = new PlayBackground(game.assetManager, game.gameCam);
         this.model = new PlayScreenModel(game, this);
+        this.playInterface = new PlayInterface(game.batch, game.fontGenerator, game.parameter);
+
         this.interfaceType = 1;
     }
 
@@ -88,6 +91,8 @@ public class PlayScreenView implements Screen {
     @Override
     public void dispose() {
         playBackGround.dispose();
+        playInterface.dispose();
+        model.dispose();
     }
 
     public void pickInterfaceToRender()    {
@@ -97,6 +102,7 @@ public class PlayScreenView implements Screen {
 
             case 1:
             game.debugPlayInterface.render();
+            playInterface.render();
             break;
 
             case 2:
@@ -124,5 +130,9 @@ public class PlayScreenView implements Screen {
      */
     public void setInterfaceType(int interfaceType)  {
         this.interfaceType = interfaceType;
+    }
+
+    public PlayInterface getPlayInterface()  {
+        return playInterface;
     }
 }

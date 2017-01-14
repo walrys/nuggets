@@ -16,9 +16,11 @@ public class PlayScreenModel {
     private String SCORE_ALARM = "Score";
     private String ACCURACY_ALARM = "Accuracy";
     private String TAP_ALARM = "Tap";
+    private String ACCURACY_INTERFACE_ONE_ALARM = "AccuracyInterfaceOne";
     private int ALARM_RATE = 60;
     private int SHIFT_RATE = 15;
     private int BASE_SCORE = 10;
+    private int ACCURACY_INTERFACE_ONE = 15;
 
     private boolean isAccuracySet = false;
 
@@ -87,6 +89,9 @@ public class PlayScreenModel {
 
         // update demo
         demo.update(dt, danceMusic, game.gameCam);
+
+        // update music
+        danceMusic.checkStopMusic();
     }
 
     public void dispose()   {
@@ -101,8 +106,11 @@ public class PlayScreenModel {
             demo.setHitMoveCount(demo.getHitMoveCount()+1);
             demo.setMatchPrev(demo.getMatchCurrent() * -1);
             demo.increaseCombo(1);
+            view.getPlayInterface().getCombo().setFontScale(1.2f);
             score += BASE_SCORE * demo.getTimeMultipler() * demo.getCurrentCombo();
         }
+
+        game.sfx.reduceSize(view.getPlayInterface().getCombo(), 0.05f);
 
         if (demo.getTotalMoveCount() != 0) {
             this.accuracy = demo.getHitMoveCount() / demo.getTotalMoveCount();
@@ -110,6 +118,9 @@ public class PlayScreenModel {
 
         game.debugPlayInterface.setPlayerMatch(Float.toString(accuracy*100));
         game.debugPlayInterface.setComboString(Integer.toString(demo.getCurrentCombo()));
+
+        // update combo view
+        view.getPlayInterface().setComboScore(demo.getCurrentCombo());
     }
 
     // updates to score view
@@ -141,9 +152,16 @@ public class PlayScreenModel {
 
             if (!isAccuracySet) {
                 game.debugScoreInterface.setAccuracy(accuracy);
+                game.alarm.setTimer(ACCURACY_INTERFACE_ONE_ALARM, ACCURACY_INTERFACE_ONE);
                 isAccuracySet = true;
             }
 
+            // show accuracy score 1 by 1
+            if (game.alarm.isTimerDone(ACCURACY_INTERFACE_ONE_ALARM) && game.debugScoreInterface.showAccuracyOrder())   {
+                game.alarm.setTimer(ACCURACY_INTERFACE_ONE_ALARM, ACCURACY_INTERFACE_ONE);
+            }
+
+            game.alarm.reduceTimer(ACCURACY_INTERFACE_ONE_ALARM, 1);
             game.alarm.reduceTimer(TAP_ALARM, 1);
         }
 
