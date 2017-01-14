@@ -226,6 +226,8 @@ public class DemonstratorNugget extends Sprite implements Nugget   {
     public void resetCount() {
         hitMoveCount = 0;
         totalMoveCount = 0;
+        currentCombo = 0;
+        supposedNumberOfCombo = 0;
     }
 
     public void increaseCombo(int increment) {

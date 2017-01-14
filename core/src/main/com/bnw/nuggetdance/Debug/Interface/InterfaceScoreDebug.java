@@ -79,7 +79,7 @@ public class InterfaceScoreDebug {
         Random rng = new Random();
         switch (type)   {
             case 0:
-                for (int i=0; i < 4; i++)   {
+                for (int i=0; i < 4; i++) {
                     accuracyTable.add(new Cross(assetManager)).pad(250, 0, 0, 0);
                 }
                 break;
@@ -128,6 +128,10 @@ public class InterfaceScoreDebug {
                 }
                 break;
         }
+
+        for (int i=0; i<accuracyTable.getCells().size;i++)    {
+            accuracyTable.getCells().get(i).getActor().setVisible(false);
+        }
     }
 
     public boolean render() {
@@ -153,6 +157,10 @@ public class InterfaceScoreDebug {
 
     public Label getScore() {
         return score;
+    }
+
+    public void setAccuracyVisibility(int index)   {
+        accuracyTable.getCells().get(index).getActor().setVisible(true);
     }
 
     public Label getTapped()    {

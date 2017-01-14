@@ -16,11 +16,10 @@ public class PlayScreenModel {
     private String SCORE_ALARM = "Score";
     private String ACCURACY_ALARM = "Accuracy";
     private String TAP_ALARM = "Tap";
-    private String ACCURACY_INTERFACE_ONE_ALARM = "AccuracyInterfaceOne";
+    private String VISIBILITY_ALARM = "Visible";
     private int ALARM_RATE = 60;
     private int SHIFT_RATE = 15;
     private int BASE_SCORE = 10;
-    private int ACCURACY_INTERFACE_ONE = 15;
 
     private boolean isAccuracySet = false;
 
@@ -31,9 +30,10 @@ public class PlayScreenModel {
     private DanceMusic danceMusic;
 
     private float accuracy;
-    private int score;
+    private long score;
+    private int index;
 
-    private int calculatedScore;
+    private long calculatedScore;
 
     private boolean showScore;
 
@@ -45,9 +45,11 @@ public class PlayScreenModel {
         this.player = new PlayerDebug(game, game.assetManager);
         this.danceMusic = new DanceMusic(game);
 
-        this.score = 0;
+        this.score = 9999999;
         this.accuracy = 0f;
-        this.calculatedScore = 0;
+        this.index = 0;
+
+        this.calculatedScore = 9999999;
 
         this.showScore = true;
 
@@ -143,25 +145,25 @@ public class PlayScreenModel {
             // reduce size if too big
             game.sfx.reduceSize(game.debugScoreInterface.getScore(), 0.02f);
 
-            game.debugScoreInterface.setScoreString(Integer.toString(calculatedScore));
+            game.debugScoreInterface.setScoreString(Long.toString(calculatedScore));
             game.alarm.reduceTimer(ACCURACY_ALARM, 1);
         }
 
         // after accuracy alarm is up, show accuracy
         if (game.alarm.isTimerDone(ACCURACY_ALARM)) {
-
             if (!isAccuracySet) {
                 game.debugScoreInterface.setAccuracy(accuracy);
-                game.alarm.setTimer(ACCURACY_INTERFACE_ONE_ALARM, ACCURACY_INTERFACE_ONE);
                 isAccuracySet = true;
             }
 
-            // show accuracy score 1 by 1
-            if (game.alarm.isTimerDone(ACCURACY_INTERFACE_ONE_ALARM) && game.debugScoreInterface.showAccuracyOrder())   {
-                game.alarm.setTimer(ACCURACY_INTERFACE_ONE_ALARM, ACCURACY_INTERFACE_ONE);
+            if (game.alarm.isTimerDone(VISIBILITY_ALARM) && index < 4) {
+                game.debugScoreInterface.setAccuracyVisibility(index);
+                index += 1;
+
+                game.alarm.setTimer(VISIBILITY_ALARM, ALARM_RATE - 30);
             }
 
-            game.alarm.reduceTimer(ACCURACY_INTERFACE_ONE_ALARM, 1);
+            game.alarm.reduceTimer(VISIBILITY_ALARM, 1);
             game.alarm.reduceTimer(TAP_ALARM, 1);
         }
 
@@ -238,8 +240,10 @@ public class PlayScreenModel {
 
     private void resetAlarms() {
         game.alarm.setTimer(SCORE_ALARM, ALARM_RATE);
-        game.alarm.setTimer(ACCURACY_ALARM, ALARM_RATE + 30);
-        game.alarm.setTimer(TAP_ALARM, ALARM_RATE);
+        game.alarm.setTimer(ACCURACY_ALARM, ALARM_RATE);
+        game.alarm.setTimer(TAP_ALARM, ALARM_RATE * 3);
+        game.alarm.setTimer(VISIBILITY_ALARM, ALARM_RATE - 30);
+        index = 0;
     }
 
     private void resetStrings() {
