@@ -13,6 +13,15 @@ public class Timer {
         this.timerCounter = new HashMap<String, Integer>();
     }
 
+    // reduce timer count
+    public void reduceTimer( String key , int rate) {
+        if (timerCounter.containsKey(key)) {
+            int tempTimer = timerCounter.get(key);
+            tempTimer -= rate;
+            timerCounter.put(key, tempTimer);
+        }
+    }
+
     // check if timer is up
     public boolean isTimerDone( String key )  {
         if (timerCounter.containsKey(key)) {
@@ -26,17 +35,9 @@ public class Timer {
         return true;
     }
 
-    // reduce timer count
-    public void reduceTimer( String key , int rate) {
-        if (timerCounter.containsKey(key)) {
-            int tempTimer = timerCounter.get(key);
-            tempTimer -= rate;
-            timerCounter.put(key, tempTimer);
-        }
-    }
-
     // set timer count
     public void setTimer(String key, int time) {
         timerCounter.put(key, time);
     }
+
 }

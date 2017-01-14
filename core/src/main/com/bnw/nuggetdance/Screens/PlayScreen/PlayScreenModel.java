@@ -18,6 +18,9 @@ public class PlayScreenModel {
     private String TAP_ALARM = "Tap";
     private int ALARM_RATE = 60;
     private int SHIFT_RATE = 15;
+    private int BASE_SCORE = 10;
+
+    private boolean isAccuracySet = false;
 
     private Nuggets game;
     private PlayScreenView view;
@@ -26,7 +29,10 @@ public class PlayScreenModel {
     private DanceMusic danceMusic;
 
     private float accuracy;
-    private int combo;
+    private int score;
+
+    private int calculatedScore;
+
     private boolean showScore;
 
     public PlayScreenModel(Nuggets game, PlayScreenView view)    {
@@ -37,8 +43,9 @@ public class PlayScreenModel {
         this.player = new PlayerDebug(game, game.assetManager);
         this.danceMusic = new DanceMusic(game);
 
+        this.score = 0;
         this.accuracy = 0f;
-        this.combo = 0;
+        this.calculatedScore = 0;
 
         this.showScore = true;
 
@@ -93,9 +100,8 @@ public class PlayScreenModel {
                 && demo.getMatchCurrent() == demo.getMatchPrev()) {
             demo.setHitMoveCount(demo.getHitMoveCount()+1);
             demo.setMatchPrev(demo.getMatchCurrent() * -1);
-            combo += 1;
-        } else  {
-            combo = 0;
+            demo.increaseCombo(1);
+            score += BASE_SCORE * demo.getTimeMultipler() * demo.getCurrentCombo();
         }
 
         if (demo.getTotalMoveCount() != 0) {
@@ -103,6 +109,7 @@ public class PlayScreenModel {
         }
 
         game.debugPlayInterface.setPlayerMatch(Float.toString(accuracy*100));
+        game.debugPlayInterface.setComboString(Integer.toString(demo.getCurrentCombo()));
     }
 
     // updates to score view
@@ -113,13 +120,30 @@ public class PlayScreenModel {
 
         // after score alarm is up, show score
         if (game.alarm.isTimerDone(SCORE_ALARM)) {
-            game.debugScoreInterface.setScoreString("Score!");
+            if (score != calculatedScore) {
+                calculateScore();
+
+                // make score size bigger
+                if (score == calculatedScore)   {
+                    game.debugScoreInterface.getScore().setFontScale(1.2f);
+                }
+            }
+
+            // reduce size if too big
+            game.sfx.reduceSize(game.debugScoreInterface.getScore(), 0.02f);
+
+            game.debugScoreInterface.setScoreString(Integer.toString(calculatedScore));
             game.alarm.reduceTimer(ACCURACY_ALARM, 1);
         }
 
         // after accuracy alarm is up, show accuracy
         if (game.alarm.isTimerDone(ACCURACY_ALARM)) {
-            game.debugScoreInterface.setAccuracyString(Float.toString(accuracy));
+
+            if (!isAccuracySet) {
+                game.debugScoreInterface.setAccuracy(accuracy);
+                isAccuracySet = true;
+            }
+
             game.alarm.reduceTimer(TAP_ALARM, 1);
         }
 
@@ -127,6 +151,7 @@ public class PlayScreenModel {
         if (game.alarm.isTimerDone(TAP_ALARM))    {
             // change input to score interface
             Gdx.input.setInputProcessor(view.getGame().debugScoreInterface.getStage());
+            game.debugScoreInterface.setTappedString("Tap screen to continue", game.sfx);
 
             // make it possible to tap when done
             showScore = !view.getGame().debugScoreInterface.isTapped();
@@ -138,18 +163,32 @@ public class PlayScreenModel {
         view.setInterfaceType(1);
         Gdx.input.setInputProcessor(view.getGame().debugPlayInterface.getStage());
 
-        // resets demo hit and accuracy count
-        resetCount();
+        // resets hit and calculated score
+        resetScore();
 
         // reset alarm values
         resetAlarms();
 
-        // rest score values
-        game.debugScoreInterface.setScoreString("");
-        game.debugScoreInterface.setAccuracyString("");
+        // reset score screen strings
+        resetStrings();
+
+        // reset accuracy
+        resetAccuracy();
 
         danceMusic.playCurrentMusic(false);
         showScore = true;
+    }
+
+    private void calculateScore()    {
+        if (score - calculatedScore < 10)   {
+            calculatedScore += 1;
+        } else if (score - calculatedScore < 100)   {
+            calculatedScore += 9;
+        } else if (score - calculatedScore < 1000)  {
+            calculatedScore += 99;
+        } else if (score - calculatedScore < 10000) {
+            calculatedScore += 999;
+        }
     }
 
     // shift to score view
@@ -174,14 +213,26 @@ public class PlayScreenModel {
         }
     }
 
-    private void resetCount()    {
+    private void resetScore()    {
         demo.resetCount();
-        accuracy = 0;
+        calculatedScore = 0;
     }
 
     private void resetAlarms() {
         game.alarm.setTimer(SCORE_ALARM, ALARM_RATE);
-        game.alarm.setTimer(ACCURACY_ALARM, ALARM_RATE);
+        game.alarm.setTimer(ACCURACY_ALARM, ALARM_RATE + 30);
         game.alarm.setTimer(TAP_ALARM, ALARM_RATE);
+    }
+
+    private void resetStrings() {
+        game.debugScoreInterface.setScoreString("");
+        game.debugScoreInterface.setTappedString("", game.sfx);
+        game.debugScoreInterface.setTappedAlpha(1);
+    }
+
+    private void resetAccuracy() {
+        game.debugScoreInterface.clearAllAccuracyChildren();
+        accuracy = 0;
+        isAccuracySet = false;
     }
 }

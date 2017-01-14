@@ -46,6 +46,8 @@ public final class AssetConstants {
 
     public static final String SPR_DEMO_BODY = new String("art/demonstrator/spr_demo_body.png");
 
+    public static final String SPR_CIRCLE = new String("art/UI/Circle.png");
+    public static final String SPR_CROSS = new String("art/UI/Cross.png");
 
     // Sound asset filepath
 

@@ -33,6 +33,7 @@ public class InterfacePlayDebug {
     private Label demoLeftPosition;
     private Label demoRightPosition;
     private Label matchCount;
+    private Label combo;
 
     public static int currentLeftArmPosition;
     public static int currentRightArmPosition;
@@ -103,6 +104,7 @@ public class InterfacePlayDebug {
         this.demoRightPosition = new Label("NONE", debugLabelStyle);
 
         this.matchCount = new Label("NO MATCH", debugLabelStyle);
+        this.combo = new Label("NOTHING", debugLabelStyle);
 
         // adding a button style
         this.skin.addRegions(buttonTexture);
@@ -194,6 +196,7 @@ public class InterfacePlayDebug {
         this.debugTableInfo.row();
 
         this.debugTableInfo.add(matchCount).pad(50, 0, 50, 0);
+        this.debugTableInfo.add(combo).pad(50, 0, 50, 0);
 
         this.debugTableInfo.row();
 
@@ -249,5 +252,10 @@ public class InterfacePlayDebug {
     public String setPlayerMatch(String matchString)    {
         matchCount.setText(matchString);
         return matchCount.getText().toString();
+    }
+
+    public String setComboString(String comboString)    {
+        combo.setText(comboString);
+        return combo.getText().toString();
     }
 }

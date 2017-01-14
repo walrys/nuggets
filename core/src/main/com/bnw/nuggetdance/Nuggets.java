@@ -1,11 +1,14 @@
 package com.bnw.nuggetdance;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.bnw.nuggetdance.Constants.ApplicationConstants;
@@ -14,13 +17,18 @@ import com.bnw.nuggetdance.Debug.InputHandlerDebug;
 import com.bnw.nuggetdance.Debug.Interface.InterfacePlayDebug;
 import com.bnw.nuggetdance.Debug.Interface.InterfaceScoreDebug;
 import com.bnw.nuggetdance.Misc.Others.Timer;
-import com.bnw.nuggetdance.Screens.Box2dScreen;
+import com.bnw.nuggetdance.Misc.SFX.SFXHandler;
+import com.bnw.nuggetdance.Screens.MainScreen;
 
 public class Nuggets extends Game {
     public SpriteBatch batch;
 	public AssetManager assetManager;
 	public OrthographicCamera gameCam;
 	public Viewport gamePort;
+
+	public FreeTypeFontGenerator fontGenerator;
+	public FreeTypeFontParameter parameter;
+	public SFXHandler sfx;
 
 	public InputHandlerDebug debugInputHandler;
 	public InterfacePlayDebug debugPlayInterface;
@@ -32,6 +40,9 @@ public class Nuggets extends Game {
 		batch = new SpriteBatch();
 		gameCam = new OrthographicCamera();
 		gamePort = new FitViewport(ApplicationConstants.WIDTH, ApplicationConstants.HEIGHT, gameCam);
+
+		fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Digitalt.ttf"));
+		parameter = new FreeTypeFontParameter();
 
 		assetManager = new AssetManager();
 		assetManager.load(AssetConstants.BACKGROUND_MAIN_1, Texture.class);
@@ -57,6 +68,8 @@ public class Nuggets extends Game {
 		assetManager.load(AssetConstants.SPR_BONE_ARM_RIGHT_7, Texture.class);
 		assetManager.load(AssetConstants.SPR_BONE_ARM_RIGHT_8, Texture.class);
 		assetManager.load(AssetConstants.SPR_DEMO_BODY, Texture.class);
+		assetManager.load(AssetConstants.SPR_CIRCLE, Texture.class);
+		assetManager.load(AssetConstants.SPR_CROSS, Texture.class);
 
 		assetManager.load(AssetConstants.MUSIC_SOUL_BOSSA, Music.class);
 		assetManager.finishLoading();
@@ -64,17 +77,20 @@ public class Nuggets extends Game {
 		// create alarm object
 		alarm = new Timer();
 
+		// create sfx object
+		sfx = new SFXHandler();
+
 		// create debug play interface
 		debugPlayInterface = new InterfacePlayDebug(batch);
 
 		// create debug score interface
-        debugScoreInterface = new InterfaceScoreDebug(batch);
+        debugScoreInterface = new InterfaceScoreDebug(assetManager, batch, fontGenerator, parameter);
 
 		// create debug input handler
 		debugInputHandler = new InputHandlerDebug(debugPlayInterface);
 
-		setScreen(new Box2dScreen(this));
-		//setScreen(new MainScreen(this));
+		//setScreen(new Box2dScreen(this));
+		setScreen(new MainScreen(this));
 	}
 
 	@Override
@@ -83,6 +99,7 @@ public class Nuggets extends Game {
 		assetManager.dispose();
 		batch.dispose();
 		debugPlayInterface.dispose();
+		fontGenerator.dispose();
 	}
 
 	@Override

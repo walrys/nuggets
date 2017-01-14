@@ -35,6 +35,9 @@ public class DemonstratorNugget extends Sprite implements Nugget   {
 
     private float hitMoveCount;
     private float totalMoveCount;
+    private int timeMultipler;
+    private int supposedNumberOfCombo;
+    private int currentCombo;
 
     private String leftArm, rightArm;
 
@@ -72,6 +75,13 @@ public class DemonstratorNugget extends Sprite implements Nugget   {
         this.hitMoveCount = 0;
         this.totalMoveCount = 0;
 
+        // timer multiplier for score
+        this.timeMultipler = 0;
+
+        // consecutive hits for supposedNumberOfCombo
+        this.supposedNumberOfCombo = 0;
+        this.currentCombo = 0;
+
         setScale(0.5f);
 
         this.bob = false;
@@ -79,11 +89,19 @@ public class DemonstratorNugget extends Sprite implements Nugget   {
     }
 
     public void update(float dt, DanceMusic danceMusic, OrthographicCamera gameCam) {
+        timeMultipler += 1;
+
         // update move generator
         if (danceMusic.isCorrectBeat()) {
             generateRandomMove(debugInterface);
             isCurrentMatched = isPrevMatched;
             totalMoveCount += 1;
+            timeMultipler = 0;
+            if (currentCombo != supposedNumberOfCombo)  {
+                currentCombo = 0;
+                supposedNumberOfCombo = 0;
+            }
+            supposedNumberOfCombo += 1;
         }
 
         if (danceMusic.getBeat() != timer)   {
@@ -97,6 +115,8 @@ public class DemonstratorNugget extends Sprite implements Nugget   {
             setPosition(x_offset - gameCam.position.x,ApplicationConstants.HEIGHT*0.625f - getHeight());
         else
             setPosition(x_offset - gameCam.position.x,ApplicationConstants.HEIGHT*0.625f - getHeight() - ApplicationConstants.BOUNCE_HEIGHT);
+
+        
     }
 
     public boolean generateRandomMove(InterfacePlayDebug debugInterface) {
@@ -204,6 +224,10 @@ public class DemonstratorNugget extends Sprite implements Nugget   {
         totalMoveCount = 0;
     }
 
+    public void increaseCombo(int increment) {
+        this.currentCombo += 1;
+    }
+
     public int getMatchCurrent()    {
         return isCurrentMatched;
     }
@@ -218,6 +242,14 @@ public class DemonstratorNugget extends Sprite implements Nugget   {
 
     public float getTotalMoveCount()  {
         return totalMoveCount;
+    }
+
+    public int getTimeMultipler()   {
+        return timeMultipler;
+    }
+
+    public int getCurrentCombo()   {
+        return currentCombo;
     }
 
     public void setHitMoveCount(float hitMoveCount)    {

@@ -23,29 +23,27 @@ public class DirectionListenerDebug extends InputListener{
 
     @Override
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-        System.out.println(textButton.getLabel().getText() + " Pressed");
+        //System.out.println(textButton.getLabel().getText() + " Pressed");
         if (direction == 0) {
             InterfacePlayDebug.currentLeftButtonPosition.setText(InterfacePlayDebug.labelStrings.get(index));
             InterfacePlayDebug.setPlayerCurrentArmPosition(index, 0);
-            System.out.println(index);
         } else if (direction == 1)  {
             InterfacePlayDebug.currentRightButtonPosition.setText(InterfacePlayDebug.labelStrings.get(index));
             InterfacePlayDebug.setPlayerCurrentArmPosition(index, 1);
-            System.out.println(index);
         }
         return super.touchDown(event, x, y, pointer, button);
     }
 
     @Override
     public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-        System.out.println(textButton.getLabel().getText() + " Entered");
+        //System.out.println(textButton.getLabel().getText() + " Entered");
         touchDown(event, x, y, pointer, 0);
         super.enter(event, x, y, pointer, fromActor);
     }
 
     @Override
     public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-        System.out.println(textButton.getLabel().getText() + " Exited");
+        //System.out.println(textButton.getLabel().getText() + " Exited");
         if (direction == 0) {
             InterfacePlayDebug.currentLeftButtonPosition.setText(InterfacePlayDebug.labelStrings.get(0));
             InterfacePlayDebug.setPlayerCurrentArmPosition(0, 0);

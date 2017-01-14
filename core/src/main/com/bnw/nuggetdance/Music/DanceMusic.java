@@ -45,7 +45,7 @@ public class DanceMusic {
         currentMusic.setLooping(isLoop);
 
         currentMusic.play();
-        currentMusic.setPosition(200);
+        //currentMusic.setPosition(200);
 
         metronome.setBpm(bpmList.get(0));
         metronome.start();
