@@ -26,6 +26,7 @@ public class PlayerDebug extends Sprite implements Nugget{
     
     public PlayerDebug(Nuggets game, AssetManager assetManager){
         super(assetManager.get(AssetConstants.SPR_PLAYER_BONE, Texture.class));
+        this.setScale(0.25f);
         this.assetManager = assetManager;
         this.leftArm = new String(AssetConstants.SPR_BONE_ARM_LEFT_0);
         this.rightArm = new String(AssetConstants.SPR_BONE_ARM_RIGHT_0);

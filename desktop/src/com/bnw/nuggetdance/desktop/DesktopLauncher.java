@@ -9,8 +9,8 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 
-		config.width = ApplicationConstants.WIDTH;     //added in tutorial 2
-		config.height = ApplicationConstants.HEIGHT;   //
+		config.width = 480;     //added in tutorial 2
+		config.height = 800;   //
 		config.title = ApplicationConstants.TITLE;
 
 		new LwjglApplication(new Nuggets(), config);

@@ -7,7 +7,8 @@ package com.bnw.nuggetdance.Constants;
 public final class AssetConstants {
 
     // Art asset filepath
-    public static final String BACKGROUND_MAIN_1 = new String("art/background/sketch_main.JPG");
+    public static final String BACKGROUND_MAIN_1 = new String("art/background/mainbg_hd2.png");
+//    public static final String BACKGROUND_MAIN_1 = new String("art/background/sketch_main.JPG");
 
     public static final String BACKGROUND_PLAY_1 = new String("art/background/sketch_play.JPG");
     public static final String BACKGROUND_PLAY_2 = new String("art/background/sketch_play2.JPG");
@@ -15,11 +16,12 @@ public final class AssetConstants {
     //Touchpad skin
     public static final String SPR_UI_KNOBSKIN = new String("art/UI/knob_skin.png");
     public static final String SPR_UI_KNOBBG = new String("art/UI/knob_bg.png");
+    public static final String SPR_UI_TOUCHPAD = new String("art/UI/touch_pad.png");
 
     //Player body
     public static final String SPR_PLAYER_BALL = new String("art/player/ball.png");
     public static final String SPR_PLAYER_BELL = new String("art/player/bell.png");
-    public static final String SPR_PLAYER_BONE = new String("art/player/bone.png");
+    public static final String SPR_PLAYER_BONE = new String("art/player/player_debug.png");
     public static final String SPR_PLAYER_BOOT = new String("art/player/boot.png");
 
     //Player Arms (bone)

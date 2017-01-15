@@ -6,8 +6,8 @@ package com.bnw.nuggetdance.Constants;
 public final class ApplicationConstants {
 
     //Application Window setup
-    public static final int WIDTH = 480;
-    public static final int HEIGHT = 800;
+    public static final int WIDTH = 1440;
+    public static final int HEIGHT = 2280;
     public static final String TITLE = "PlayerNugget Dance";
 
     //Player Constants

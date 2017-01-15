@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -46,6 +48,7 @@ public class InterfacePlayDebug {
     private Touchpad.TouchpadStyle knobStyle;*/
 
     private Skin skin, knobSkin;
+    private Image touchPad;
     private TextureAtlas buttonTexture;
     private ArrayList<TextButton> leftButtons;
     private ArrayList<TextButton> rightButtons;
@@ -64,7 +67,10 @@ public class InterfacePlayDebug {
         this.controlsTableBottom = new Table();
         this.debugTableInfo = new Table();
 
+
         /*
+        this.touchPad = new Image(new Texture(AssetConstants.SPR_UI_TOUCHPAD));
+
         knobSkin = new Skin();
 
         knobSkin.add("knobBackground", new Texture(AssetConstants.SPR_UI_KNOBBG));
@@ -135,13 +141,21 @@ public class InterfacePlayDebug {
 
         // modify button size
         for (int i=0;i<leftButtons.size();i++)  {
-            leftButtons.get(i).getLabel().setWrap(true);
-            leftButtons.get(i).getLabel().setWidth(100);
+            Label label = leftButtons.get(i).getLabel();
+            label.setWrap(true);
+            label.setWidth(100);
+
+            //set buttons invisible
+            //leftButtons.get(i).setColor(0,0,0,0);
         }
 
         for (int i=0;i<rightButtons.size();i++)  {
-            rightButtons.get(i).getLabel().setWrap(true);
-            rightButtons.get(i).getLabel().setWidth(100);
+            Label label = rightButtons.get(i).getLabel();
+            label.setWrap(true);
+            label.setWidth(100);
+
+            //set buttons invisible
+            //leftButtons.get(i).setColor(0,0,0,0);
         }
 
         // add listener
@@ -205,13 +219,19 @@ public class InterfacePlayDebug {
         stage.addActor(this.controlsTableTop);
         stage.addActor(this.controlsTableCentre);
         stage.addActor(this.controlsTableBottom);
+
         stage.addActor(this.debugTableInfo);
 
+        //adding touchpad to screen
+        stage.addActor(this.touchPad);
+        touchPad.setHeight(touchPad.getHeight()*ApplicationConstants.WIDTH/ touchPad.getWidth());
+        touchPad.setWidth(ApplicationConstants.WIDTH);
+        touchPad.setPosition(0,0);
 
-        /*knobLeft.setPosition(0,ApplicationConstants.HEIGHT/2);
-        knobRight.setPosition(ApplicationConstants.WIDTH/2,ApplicationConstants.HEIGHT/2);
-        stage.addActor(this.knobLeft);
-        stage.addActor(this.knobRight);*/
+        //knobLeft.setPosition(0,ApplicationConstants.HEIGHT/2);
+        //knobRight.setPosition(ApplicationConstants.WIDTH/2,ApplicationConstants.HEIGHT/2);
+        //stage.addActor(this.knobLeft);
+        //stage.addActor(this.knobRight);
     }
 
     public boolean render()  {

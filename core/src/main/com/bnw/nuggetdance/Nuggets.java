@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.bnw.nuggetdance.Constants.ApplicationConstants;
@@ -18,6 +19,7 @@ import com.bnw.nuggetdance.Debug.Interface.InterfacePlayDebug;
 import com.bnw.nuggetdance.Debug.Interface.InterfaceScoreDebug;
 import com.bnw.nuggetdance.Misc.Others.Timer;
 import com.bnw.nuggetdance.Misc.SFX.SFXHandler;
+import com.bnw.nuggetdance.Screens.Box2dScreen;
 import com.bnw.nuggetdance.Screens.MainScreen;
 
 public class Nuggets extends Game {
@@ -39,7 +41,7 @@ public class Nuggets extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		gameCam = new OrthographicCamera();
-		gamePort = new FitViewport(ApplicationConstants.WIDTH, ApplicationConstants.HEIGHT, gameCam);
+		gamePort = new FillViewport(ApplicationConstants.WIDTH, ApplicationConstants.HEIGHT, gameCam);
 
 		fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Digitalt.ttf"));
 		parameter = new FreeTypeFontParameter();
